@@ -1,0 +1,199 @@
+═══════════════════════════════════════════════════════════
+  📖 GUÍA PASO A PASO - ANDROID STUDIO
+═══════════════════════════════════════════════════════════
+
+🎯 OBJETIVO: Compilar y ejecutar la app con el logo
+
+═══════════════════════════════════════════════════════════
+
+📍 PASO 1: ABRIR ANDROID STUDIO
+
+   1. Abre Android Studio
+   2. Si no está abierto el proyecto, ábrelo:
+      File → Open → Selecciona la carpeta:
+      C:\Users\Axel\StudioProjects\App_servicio_tecnico_play
+
+═══════════════════════════════════════════════════════════
+
+📍 PASO 2: SYNC GRADLE (MUY IMPORTANTE)
+
+   Busca en la parte SUPERIOR de la ventana:
+
+   ┌─────────────────────────────────────────┐
+   │ ⚠️ Gradle files have changed...        │
+   │              [Sync Now]  [Dismiss]      │
+   └─────────────────────────────────────────┘
+
+   → Click en "Sync Now"
+   → ESPERA a que termine (verás una barra de progreso abajo)
+   → Debe decir "Gradle sync finished"
+
+   SI NO VES ESE BANNER:
+   - Busca arriba a la DERECHA un ícono 🐘 con una flecha
+   - Click en ese ícono
+   - O ve al menú: File → Sync Project with Gradle Files
+
+═══════════════════════════════════════════════════════════
+
+📍 PASO 3: CLEAN PROJECT
+
+   En el menú de arriba:
+
+   Build → Clean Project
+
+   Ubicación del menú Build:
+   [File] [Edit] [View] [Navigate] [Code] [Analyze] [Refactor] [Build] [Run] [Tools]
+                                                                  ↑
+                                                            Click aquí
+
+   Cuando hagas click en "Build" verás:
+   ┌─────────────────────────────┐
+   │ Generate Signed Bundle...   │
+   │ ─────────────────────────── │
+   │ Build Bundle(s) / APK(s)  ▶ │
+   │ Analyze APK...              │
+   │ ─────────────────────────── │
+   │ Clean Project             ← │ CLICK AQUÍ
+   │ Make Project                │
+   │ Make Module 'app'           │
+   │ ─────────────────────────── │
+   │ ...                         │
+   └─────────────────────────────┘
+
+   → Click en "Clean Project"
+   → ESPERA a que termine (10-30 segundos)
+
+═══════════════════════════════════════════════════════════
+
+📍 PASO 4: MAKE PROJECT (Compilar)
+
+   En el mismo menú Build:
+
+   Build → Make Project
+
+   O también puedes presionar: Ctrl + F9
+
+   En el menú verás:
+   ┌─────────────────────────────┐
+   │ Clean Project               │
+   │ Make Project              ← │ CLICK AQUÍ
+   │ Make Module 'app'           │
+   └─────────────────────────────┘
+
+   → Click en "Make Project"
+   → ESPERA a que compile (puede tardar 2-5 minutos)
+   → Abajo verás: "Build: completed successfully"
+
+   SI NO ENCUENTRAS "Make Project":
+   Usa: Build → Build Bundle(s) / APK(s) → Build APK(s)
+
+═══════════════════════════════════════════════════════════
+
+📍 PASO 5: CONECTAR DISPOSITIVO
+
+   OPCIÓN A - EMULADOR:
+
+   1. Arriba verás un desplegable junto al botón ▶️
+   2. Click en el desplegable
+   3. Si no hay emulador, selecciona "Device Manager"
+   4. Crea o inicia un emulador
+
+   OPCIÓN B - DISPOSITIVO FÍSICO:
+
+   1. Conecta tu teléfono con USB
+   2. En el teléfono: Activa "Depuración USB"
+      (Ajustes → Opciones de desarrollador)
+   3. Autoriza la conexión en el teléfono
+
+═══════════════════════════════════════════════════════════
+
+📍 PASO 6: EJECUTAR LA APP
+
+   En la parte SUPERIOR, verás:
+
+   [app ▼]  [Pixel 5 API 34 ▼]  ▶️  ⬛  🐛
+                                 ↑
+                          CLICK AQUÍ (Botón RUN)
+
+   → Click en el botón verde ▶️ "Run 'app'"
+   → O presiona: Shift + F10
+   → ESPERA a que instale (30-60 segundos)
+   → La app se abrirá automáticamente
+
+═══════════════════════════════════════════════════════════
+
+✅ SI TODO SALIÓ BIEN:
+
+   Verás en tu dispositivo:
+
+   ┌───────────────────────────┐
+   │ ☰  Inicio                 │ ← Barra superior
+   ├───────────────────────────┤
+   │                           │
+   │    [LOGO JUEGA]           │ ← Tu logo
+   │                           │
+   │      Bienvenido           │ ← Texto
+   │                           │
+   │  App Servicio Técnico     │
+   │                           │
+   │  Usa el menú ☰...         │
+   │                           │
+   └───────────────────────────┘
+
+   🎉 ¡FUNCIONA!
+
+═══════════════════════════════════════════════════════════
+
+❌ SI LA APP CRASHEA (se cierra):
+
+   1. En Android Studio, abajo verás pestañas:
+      [Problems] [Build] [Logcat] [Terminal] [TODO]
+                           ↑
+                    CLICK EN LOGCAT
+
+   2. En Logcat, busca líneas en ROJO
+
+   3. Busca texto que diga:
+      "FATAL EXCEPTION"
+      o
+      "AndroidRuntime"
+
+   4. COPIA todo ese mensaje de error
+
+   5. Comparte el error completo
+
+═══════════════════════════════════════════════════════════
+
+💡 ATAJOS DE TECLADO ÚTILES:
+
+   Ctrl + F9        = Make Project (compilar)
+   Shift + F10      = Run (ejecutar app)
+   Ctrl + Shift + F9 = Debug
+   Alt + 1          = Abrir/cerrar panel de proyecto
+
+═══════════════════════════════════════════════════════════
+
+🆘 ALTERNATIVA FÁCIL - USA EL SCRIPT:
+
+   Si Android Studio te confunde, usa esta opción:
+
+   1. Cierra Android Studio
+   2. Ve a: C:\Users\Axel\StudioProjects\App_servicio_tecnico_play
+   3. Doble click en: COMPILAR_CON_LOGO.bat
+   4. Espera a que termine
+   5. Abre Android Studio
+   6. Click en ▶️ Run
+
+═══════════════════════════════════════════════════════════
+
+📞 RECUERDA:
+
+   1. Sync Gradle (muy importante)
+   2. Clean Project
+   3. Make Project (o Build APK)
+   4. Run ▶️
+
+   ¡Sigue estos pasos y funcionará!
+
+═══════════════════════════════════════════════════════════
+

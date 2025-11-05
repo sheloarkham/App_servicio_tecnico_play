@@ -1,4 +1,4 @@
-package com.example.appservtecnico
+package appserviciotecnico
 
 import org.junit.Test
 
