@@ -5,6 +5,7 @@ import appserviciotecnico.model.entities.FormularioServicioEntity
 import kotlinx.coroutines.flow.Flow
 
 // 📦 Repositorio para gestionar formularios de servicio técnico
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 class FormularioServicioRepository(
     private val dao: FormularioServicioDao
 ) {

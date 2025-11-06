@@ -1,12 +1,13 @@
 package appserviciotecnico.model
 
 // 🔐 Estados de UI para el login
+@Suppress("unused")
 sealed class LoginUIState {
     // Estado inicial
-    object Idle : LoginUIState()
+    data object Idle : LoginUIState()
 
     // Procesando login
-    object Loading : LoginUIState()
+    data object Loading : LoginUIState()
 
     // Login exitoso
     data class Success(val session: UserSession) : LoginUIState()
@@ -18,6 +19,6 @@ sealed class LoginUIState {
     data class ValidationError(val errors: Map<String, String>) : LoginUIState()
 
     // Usuario ingresó como invitado
-    object GuestMode : LoginUIState()
+    data object GuestMode : LoginUIState()
 }
 

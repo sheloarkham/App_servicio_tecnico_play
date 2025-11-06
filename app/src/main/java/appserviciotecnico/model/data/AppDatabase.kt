@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import appserviciotecnico.model.entities.FormularioServicioEntity
 
 // 🗄️ Base de datos Room para la aplicación
+@Suppress("unused")
 @Database(
     entities = [FormularioServicioEntity::class],
     version = 1,

@@ -1,6 +1,7 @@
 package appserviciotecnico.model
 
 // ⚠️ Clase para manejar errores del formulario de servicio
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 data class FormularioServicioErrores(
     val nombreCliente: String? = null,
     val emailCliente: String? = null,

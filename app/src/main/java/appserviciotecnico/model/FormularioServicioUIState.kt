@@ -1,12 +1,13 @@
 package appserviciotecnico.model
 
 // 🎯 Estados de UI para el formulario de servicio
+@Suppress("unused")
 sealed class FormularioServicioUIState {
     // Estado inicial/inactivo
-    object Idle : FormularioServicioUIState()
+    data object Idle : FormularioServicioUIState()
 
     // Cargando datos
-    object Loading : FormularioServicioUIState()
+    data object Loading : FormularioServicioUIState()
 
     // Éxito al guardar/actualizar
     data class Success(val message: String) : FormularioServicioUIState()
