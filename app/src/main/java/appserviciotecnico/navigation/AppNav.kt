@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.*
+import appserviciotecnico.ui.screen.FormularioServicioScreen
 import appserviciotecnico.ui.screen.HomeScreen
 import appserviciotecnico.ui.screen.LoginScreen
 import appserviciotecnico.ui.screen.StartScreen
@@ -56,6 +57,18 @@ fun AppNav() {
                 HomeScreen()
             }
         }
+
+        // FORMULARIO DE SERVICIO (con drawer)
+        composable(Routes.Form) {
+            DrawerScaffold(
+                currentRoute = Routes.Form,
+                onNavigate = { nav.navigate(it) },
+                drawerState = drawerState,
+                scope = scope
+            ) {
+                FormularioServicioScreen()
+            }
+        }
     }
 }
 
@@ -69,7 +82,8 @@ private fun DrawerScaffold(
     content: @Composable () -> Unit
 ) {
     val destinations = listOf(
-        DrawerItem("Inicio", Routes.Home)
+        DrawerItem("Inicio", Routes.Home),
+        DrawerItem("Solicitar Servicio", Routes.Form)
     )
 
     ModalNavigationDrawer(
@@ -121,6 +135,7 @@ private data class DrawerItem(val label: String, val route: String)
 @Composable
 private fun appBarTitle(route: String?): String = when (route) {
     Routes.Home -> "Inicio"
+    Routes.Form -> "Solicitar Servicio"
     else -> ""
 }
 
