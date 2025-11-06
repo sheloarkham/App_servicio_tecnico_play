@@ -1,6 +1,5 @@
 package appserviciotecnico.navigation
 
-// 🔧 Importaciones necesarias para navegación, diseño y estado
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -8,26 +7,71 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.*
+import appserviciotecnico.ui.screen.HomeScreen
+import appserviciotecnico.ui.screen.LoginScreen
 import appserviciotecnico.ui.screen.StartScreen
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
-// 🧭 Composable principal que controla la navegación y el menú lateral
-@OptIn(ExperimentalMaterial3Api::class)
+// 🧭 Composable principal que controla la navegación
 @Composable
 fun AppNav() {
-    // 🎛 Estado del drawer (menú lateral)
+    val nav = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
-
-    // 🧵 Scope para lanzar acciones como abrir/cerrar el drawer
     val scope = rememberCoroutineScope()
 
-    // 📋 Lista de ítems del menú lateral
+    NavHost(navController = nav, startDestination = Routes.Start) {
+        // LOGO INICIAL (Splash)
+        composable(Routes.Start) {
+            StartScreen(
+                onNavigateToLogin = {
+                    nav.navigate(Routes.Login) {
+                        popUpTo(Routes.Start) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        // LOGIN
+        composable(Routes.Login) {
+            LoginScreen(
+                onLoginSuccess = {
+                    nav.navigate(Routes.Home) {
+                        popUpTo(Routes.Login) { inclusive = true } // limpia login del back stack
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+
+        // HOME (Pantalla principal con drawer)
+        composable(Routes.Home) {
+            DrawerScaffold(
+                currentRoute = Routes.Home,
+                onNavigate = { nav.navigate(it) },
+                drawerState = drawerState,
+                scope = scope
+            ) {
+                HomeScreen()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun DrawerScaffold(
+    currentRoute: String,
+    onNavigate: (String) -> Unit,
+    drawerState: DrawerState,
+    scope: CoroutineScope,
+    content: @Composable () -> Unit
+) {
     val destinations = listOf(
-        DrawerItem("Inicio", "start") // ← Solo uno por ahora
+        DrawerItem("Inicio", Routes.Home)
     )
 
-    // 🧭 Menú lateral (drawer)
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -40,9 +84,12 @@ fun AppNav() {
                 destinations.forEach { item ->
                     NavigationDrawerItem(
                         label = { Text(item.label) },
-                        selected = "start" == item.route,
+                        selected = currentRoute == item.route,
                         onClick = {
                             scope.launch { drawerState.close() }
+                            if (currentRoute != item.route) {
+                                onNavigate(item.route)
+                            }
                         },
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                     )
@@ -50,11 +97,10 @@ fun AppNav() {
             }
         }
     ) {
-        // 🧱 Barra superior (top bar) con botón de menú
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Inicio") },
+                    title = { Text(appBarTitle(currentRoute)) },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(Icons.Default.Menu, contentDescription = "Menú")
@@ -63,12 +109,18 @@ fun AppNav() {
                 )
             }
         ) { padding ->
-            // 🖼 Contenido principal de la pantalla
-            StartScreen(modifier = Modifier.padding(padding))
+            Surface(Modifier.padding(padding)) {
+                content()
+            }
         }
     }
 }
 
-// 🧩 Modelo de ítem del menú lateral
 private data class DrawerItem(val label: String, val route: String)
+
+@Composable
+private fun appBarTitle(route: String?): String = when (route) {
+    Routes.Home -> "Inicio"
+    else -> ""
+}
 
