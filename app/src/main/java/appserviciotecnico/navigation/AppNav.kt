@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.*
+import appserviciotecnico.ui.screen.CatalogoServiciosScreen
 import appserviciotecnico.ui.screen.FormularioServicioScreen
 import appserviciotecnico.ui.screen.HomeScreen
 import appserviciotecnico.ui.screen.LoginScreen
@@ -69,6 +70,18 @@ fun AppNav() {
                 FormularioServicioScreen()
             }
         }
+
+        // CATÁLOGO DE SERVICIOS (con drawer)
+        composable(Routes.Catalogo) {
+            DrawerScaffold(
+                currentRoute = Routes.Catalogo,
+                onNavigate = { nav.navigate(it) },
+                drawerState = drawerState,
+                scope = scope
+            ) {
+                CatalogoServiciosScreen()
+            }
+        }
     }
 }
 
@@ -83,6 +96,7 @@ private fun DrawerScaffold(
 ) {
     val destinations = listOf(
         DrawerItem("Inicio", Routes.Home),
+        DrawerItem("Catálogo de Servicios", Routes.Catalogo),
         DrawerItem("Solicitar Servicio", Routes.Form)
     )
 
@@ -135,6 +149,7 @@ private data class DrawerItem(val label: String, val route: String)
 @Composable
 private fun appBarTitle(route: String?): String = when (route) {
     Routes.Home -> "Inicio"
+    Routes.Catalogo -> "Catálogo de Servicios"
     Routes.Form -> "Solicitar Servicio"
     else -> ""
 }
