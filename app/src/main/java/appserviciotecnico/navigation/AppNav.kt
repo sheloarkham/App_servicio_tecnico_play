@@ -8,6 +8,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.*
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import appserviciotecnico.ui.screen.AgendarServicioScreen
 import appserviciotecnico.ui.screen.CatalogoServiciosScreen
 import appserviciotecnico.ui.screen.FormularioServicioScreen
 import appserviciotecnico.ui.screen.HomeScreen
@@ -79,7 +82,35 @@ fun AppNav() {
                 drawerState = drawerState,
                 scope = scope
             ) {
-                CatalogoServiciosScreen()
+                CatalogoServiciosScreen(
+                    onNavigateToAgendar = { categoriaId, categoriaNombre ->
+                        nav.navigate("${Routes.Agendar}/$categoriaId/$categoriaNombre")
+                    }
+                )
+            }
+        }
+
+        // AGENDAR SERVICIO (con drawer)
+        composable(
+            route = "${Routes.Agendar}/{categoriaId}/{categoriaNombre}",
+            arguments = listOf(
+                navArgument("categoriaId") { type = NavType.IntType },
+                navArgument("categoriaNombre") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val categoriaId = backStackEntry.arguments?.getInt("categoriaId") ?: 0
+            val categoriaNombre = backStackEntry.arguments?.getString("categoriaNombre") ?: ""
+
+            DrawerScaffold(
+                currentRoute = Routes.Agendar,
+                onNavigate = { nav.navigate(it) },
+                drawerState = drawerState,
+                scope = scope
+            ) {
+                AgendarServicioScreen(
+                    categoriaId = categoriaId,
+                    categoriaNombre = categoriaNombre
+                )
             }
         }
     }
@@ -151,6 +182,7 @@ private fun appBarTitle(route: String?): String = when (route) {
     Routes.Home -> "Inicio"
     Routes.Catalogo -> "Catálogo de Servicios"
     Routes.Form -> "Solicitar Servicio"
+    Routes.Agendar -> "Agendar Servicio"
     else -> ""
 }
 

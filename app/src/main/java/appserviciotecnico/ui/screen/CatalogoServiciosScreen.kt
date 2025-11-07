@@ -11,9 +11,11 @@ import androidx.compose.ui.unit.dp
 import appserviciotecnico.model.CategoriaServicio
 import appserviciotecnico.ui.components.CategoriaCard
 
-// 📋 Pantalla de catálogo de servicios con categorías
+//  Pantalla de catálogo de servicios con categorías
 @Composable
-fun CatalogoServiciosScreen() {
+ fun CatalogoServiciosScreen(
+    onNavigateToAgendar: (categoriaId: Int, categoriaNombre: String) -> Unit = { _, _ -> }
+) {
 
     // Obtener las categorías de servicios
     val categorias = remember { CategoriaServicio.obtenerCategorias() }
@@ -25,7 +27,14 @@ fun CatalogoServiciosScreen() {
     if (categoriaSeleccionada != null) {
         DetallesCategoriaDialog(
             categoria = categoriaSeleccionada!!,
-            onDismiss = { categoriaSeleccionada = null }
+            onDismiss = { categoriaSeleccionada = null },
+            onAgendar = {
+                onNavigateToAgendar(
+                    categoriaSeleccionada!!.id,
+                    categoriaSeleccionada!!.nombre
+                )
+                categoriaSeleccionada = null
+            }
         )
     }
 
@@ -77,7 +86,8 @@ fun CatalogoServiciosScreen() {
 @Composable
 fun DetallesCategoriaDialog(
     categoria: CategoriaServicio,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onAgendar: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -129,6 +139,11 @@ fun DetallesCategoriaDialog(
             }
         },
         confirmButton = {
+            Button(onClick = onAgendar) {
+                Text("Agendar Servicio")
+            }
+        },
+        dismissButton = {
             TextButton(onClick = onDismiss) {
                 Text("Cerrar")
             }
