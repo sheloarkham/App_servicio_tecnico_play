@@ -1,23 +1,29 @@
 package appserviciotecnico.ui.screen
 
+import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.ui.components.InputText
 import appserviciotecnico.viewmodel.FormularioServicioViewModel
+import appserviciotecnico.viewmodel.FormularioServicioViewModelFactory
 
 // 📋 Pantalla de formulario de servicio técnico PlayStation
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormularioServicioScreen() {
 
-    val viewModel: FormularioServicioViewModel = viewModel()
+    val context = LocalContext.current
+    val viewModel: FormularioServicioViewModel = viewModel(
+        factory = FormularioServicioViewModelFactory(context.applicationContext as Application)
+    )
     val estado by viewModel.estado.collectAsState()
 
     // Lista de tipos de consolas

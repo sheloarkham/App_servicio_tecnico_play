@@ -1,5 +1,6 @@
 package appserviciotecnico.ui.screen
 
+import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -7,21 +8,29 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.model.EstadoSolicitud
 import appserviciotecnico.model.Solicitud
-import appserviciotecnico.model.SolicitudesData
 import appserviciotecnico.ui.components.SolicitudCard
+import appserviciotecnico.viewmodel.EstadoSolicitudesViewModel
+import appserviciotecnico.viewmodel.EstadoSolicitudesViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
-// Pantalla para visualizar estado de solicitudes
+// 📊 Pantalla para visualizar estado de solicitudes
 @Composable
 fun EstadoSolicitudesScreen() {
 
-    // Obtener solicitudes de ejemplo
-    val solicitudes = remember { SolicitudesData.obtenerSolicitudesEjemplo() }
+    val context = LocalContext.current
+    val viewModel: EstadoSolicitudesViewModel = viewModel(
+        factory = EstadoSolicitudesViewModelFactory(context.applicationContext as Application)
+    )
+
+    // Obtener solicitudes desde Room Database
+    val solicitudes by viewModel.solicitudes.collectAsState()
 
     // Estado para filtro
     var filtroSeleccionado by remember { mutableStateOf<EstadoSolicitud?>(null) }

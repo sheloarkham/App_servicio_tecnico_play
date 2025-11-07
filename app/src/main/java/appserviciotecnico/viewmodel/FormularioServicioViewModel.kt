@@ -1,15 +1,20 @@
 package appserviciotecnico.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import appserviciotecnico.model.FormularioServicioErrores
+import appserviciotecnico.model.entities.FormularioServicioEntity
+import appserviciotecnico.model.repository.FormularioServicioRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 // 🎮 ViewModel para gestionar el formulario de servicio técnico PlayStation
-@Suppress("unused", "MemberVisibilityCanBePrivate")
-class FormularioServicioViewModel : ViewModel() {
+class FormularioServicioViewModel(
+    private val repository: FormularioServicioRepository
+) : ViewModel() {
 
     private val _estado = MutableStateFlow(FormularioServicioState())
     val estado: StateFlow<FormularioServicioState> = _estado.asStateFlow()
@@ -79,7 +84,7 @@ class FormularioServicioViewModel : ViewModel() {
             return
         }
 
-        // Simular envío exitoso
+        // Guardar en Room Database
         _estado.update {
             it.copy(
                 enviando = true,
@@ -87,16 +92,39 @@ class FormularioServicioViewModel : ViewModel() {
             )
         }
 
-        // Simular respuesta del servidor (sin coroutines por ahora)
-        _estado.update {
-            it.copy(
-                enviando = false,
-                mensajeExito = "✅ Solicitud enviada exitosamente. Nos contactaremos pronto."
-            )
-        }
+        viewModelScope.launch {
+            try {
+                val entity = FormularioServicioEntity(
+                    nombreCliente = estadoActual.nombreCliente,
+                    correoCliente = estadoActual.correoCliente,
+                    telefonoCliente = estadoActual.telefonoCliente,
+                    tipoConsola = estadoActual.tipoConsola,
+                    modeloConsola = estadoActual.modeloConsola,
+                    descripcionProblema = estadoActual.descripcionProblema
+                )
 
-        // Limpiar formulario después de 3 segundos
-        limpiarFormulario()
+                repository.guardarFormulario(entity)
+
+                _estado.update {
+                    it.copy(
+                        enviando = false,
+                        mensajeExito = "✅ Solicitud guardada exitosamente en la base de datos local."
+                    )
+                }
+
+                // Limpiar formulario después de 2 segundos
+                kotlinx.coroutines.delay(2000)
+                limpiarFormulario()
+
+            } catch (e: Exception) {
+                _estado.update {
+                    it.copy(
+                        enviando = false,
+                        mensajeExito = "❌ Error al guardar: ${e.message}"
+                    )
+                }
+            }
+        }
     }
 
     // 🔍 Validar todos los campos
@@ -130,4 +158,3 @@ class FormularioServicioViewModel : ViewModel() {
         _estado.update { FormularioServicioState() }
     }
 }
-

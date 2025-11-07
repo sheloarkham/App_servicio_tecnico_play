@@ -8,28 +8,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FormularioServicioDao {
 
-    // Insertar un nuevo formulario
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(formulario: FormularioServicioEntity): Long
+    suspend fun insertFormulario(formulario: FormularioServicioEntity): Long
 
-    // Actualizar un formulario existente
-    @Update
-    suspend fun update(formulario: FormularioServicioEntity)
+    @Query("SELECT * FROM formulario_servicio ORDER BY id DESC")
+    fun getFormularios(): Flow<List<FormularioServicioEntity>>
 
-    // Eliminar un formulario
-    @Delete
-    suspend fun delete(formulario: FormularioServicioEntity)
-
-    // Obtener todos los formularios
-    @Query("SELECT * FROM formularios_servicio ORDER BY fecha DESC")
-    fun getAllFormularios(): Flow<List<FormularioServicioEntity>>
-
-    // Obtener un formulario por ID
-    @Query("SELECT * FROM formularios_servicio WHERE id = :id")
-    suspend fun getFormularioById(id: Int): FormularioServicioEntity?
-
-    // Obtener formularios por estado
-    @Query("SELECT * FROM formularios_servicio WHERE estado = :estado ORDER BY fecha DESC")
-    fun getFormulariosByEstado(estado: String): Flow<List<FormularioServicioEntity>>
+    @Query("DELETE FROM formulario_servicio")
+    suspend fun deleteAll()
 }
-

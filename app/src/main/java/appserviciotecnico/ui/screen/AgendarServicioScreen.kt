@@ -1,5 +1,6 @@
 package appserviciotecnico.ui.screen
 
+import android.app.Application
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import appserviciotecnico.model.data.AppDatabase
+import appserviciotecnico.model.entities.SolicitudEntity
+import appserviciotecnico.model.repository.SolicitudRepository
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,7 +23,7 @@ import java.util.*
 @Suppress("unused")
 @Composable
 fun AgendarServicioScreen(
-    @Suppress("UNUSED_PARAMETER") categoriaId: Int,
+    categoriaId: Int,
     categoriaNombre: String
 ) {
     var fechaSeleccionada by remember { mutableStateOf<Date?>(null) }
@@ -29,6 +34,13 @@ fun AgendarServicioScreen(
 
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
+
+    // Repository para guardar en Room
+    val repository = remember {
+        val database = AppDatabase.getDatabase(context.applicationContext as Application)
+        SolicitudRepository(database.solicitudDao())
+    }
+    val scope = rememberCoroutineScope()
 
     // Formatters
     val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -290,9 +302,34 @@ fun AgendarServicioScreen(
                         errorHora = true
                     }
 
-                    // Si todo está bien, mostrar confirmación
+                    // Si todo está bien, guardar en Room y mostrar confirmación
                     if (fechaSeleccionada != null && horaSeleccionada != null) {
-                        mostrarConfirmacion = true
+                        val horaFormateada = String.format(
+                            Locale.getDefault(),
+                            "%02d:%02d",
+                            horaSeleccionada!!.first,
+                            horaSeleccionada!!.second
+                        )
+
+                        val solicitud = SolicitudEntity(
+                            servicio = categoriaNombre,
+                            fechaAgendada = fechaSeleccionada!!.time,
+                            horaAgendada = horaFormateada,
+                            estado = "Pendiente",
+                            clienteNombre = "Usuario",
+                            descripcion = "Servicio de $categoriaNombre agendado",
+                            categoriaId = categoriaId
+                        )
+
+                        // Guardar usando coroutine scope
+                        scope.launch {
+                            try {
+                                repository.guardarSolicitud(solicitud)
+                                mostrarConfirmacion = true
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
                     }
                 },
                 modifier = Modifier
