@@ -12,6 +12,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import appserviciotecnico.ui.screen.AgendarServicioScreen
 import appserviciotecnico.ui.screen.CatalogoServiciosScreen
+import appserviciotecnico.ui.screen.EstadoSolicitudesScreen
 import appserviciotecnico.ui.screen.FormularioServicioScreen
 import appserviciotecnico.ui.screen.HomeScreen
 import appserviciotecnico.ui.screen.LoginScreen
@@ -113,6 +114,18 @@ fun AppNav() {
                 )
             }
         }
+
+        // ESTADO DE SOLICITUDES (con drawer)
+        composable(Routes.Estado) {
+            DrawerScaffold(
+                currentRoute = Routes.Estado,
+                onNavigate = { nav.navigate(it) },
+                drawerState = drawerState,
+                scope = scope
+            ) {
+                EstadoSolicitudesScreen()
+            }
+        }
     }
 }
 
@@ -128,7 +141,8 @@ private fun DrawerScaffold(
     val destinations = listOf(
         DrawerItem("Inicio", Routes.Home),
         DrawerItem("Catálogo de Servicios", Routes.Catalogo),
-        DrawerItem("Solicitar Servicio", Routes.Form)
+        DrawerItem("Solicitar Servicio", Routes.Form),
+        DrawerItem("Mis Solicitudes", Routes.Estado)
     )
 
     ModalNavigationDrawer(
@@ -183,6 +197,7 @@ private fun appBarTitle(route: String?): String = when (route) {
     Routes.Catalogo -> "Catálogo de Servicios"
     Routes.Form -> "Solicitar Servicio"
     Routes.Agendar -> "Agendar Servicio"
+    Routes.Estado -> "Mis Solicitudes"
     else -> ""
 }
 
