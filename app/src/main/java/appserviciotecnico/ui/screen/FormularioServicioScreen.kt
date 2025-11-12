@@ -1,6 +1,8 @@
 package appserviciotecnico.ui.screen
 
 import android.app.Application
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -58,7 +60,7 @@ fun FormularioServicioScreen() {
         ) {
         // 🎮 Título
         Text(
-            text = "Solicitud de Servicio Técnico",
+            text = "Solicitar Cotización",
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
@@ -66,7 +68,7 @@ fun FormularioServicioScreen() {
         )
 
         Text(
-            text = "Complete el formulario para solicitar servicio",
+            text = "Describe el problema de tu consola y te enviaremos una cotización aproximada del costo de reparación",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -202,36 +204,53 @@ fun FormularioServicioScreen() {
 
         // 🔧 Descripción del problema
         Text(
-            text = "Descripción del problema",
+            text = "Descripción de la falla",
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
         )
 
         InputText(
             valor = estado.descripcionProblema,
             error = estado.errores.descripcionProblema,
-            label = "Describa detalladamente el problema",
+            label = "Describa detalladamente la falla o problema que presenta la consola",
             onChange = viewModel::onDescripcionChange,
             maxLines = 5
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // ✅ Mensaje de éxito
-        estado.mensajeExito?.let { mensaje ->
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+        // ✅ Mensaje de éxito con animación
+        AnimatedVisibility(
+            visible = estado.mensajeExito != null,
+            enter = slideInVertically(
+                initialOffsetY = { -it / 2 },
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessLow
                 )
-            ) {
-                Text(
-                    text = mensaje,
-                    modifier = Modifier.padding(16.dp),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    style = MaterialTheme.typography.bodyMedium
-                )
+            ) + fadeIn(animationSpec = tween(300)),
+            exit = slideOutVertically(
+                targetOffsetY = { -it },
+                animationSpec = tween(200)
+            ) + fadeOut(animationSpec = tween(200))
+        ) {
+            estado.mensajeExito?.let { mensaje ->
+                Column {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        )
+                    ) {
+                        Text(
+                            text = mensaje,
+                            modifier = Modifier.padding(16.dp),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
             }
-            Spacer(modifier = Modifier.height(16.dp))
         }
 
         // 🔘 Botón enviar
@@ -253,12 +272,12 @@ fun FormularioServicioScreen() {
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
-                    "Enviando...",
+                    "Enviando cotización...",
                     style = MaterialTheme.typography.labelLarge
                 )
             } else {
                 Text(
-                    "Enviar Solicitud",
+                    "Solicitar Cotización",
                     style = MaterialTheme.typography.labelLarge.copy(
                         fontWeight = FontWeight.Bold
                     )

@@ -13,6 +13,11 @@ data class FormularioServicioEntity(
     val telefonoCliente: String,
     val tipoConsola: String,
     val modeloConsola: String,
-    val descripcionProblema: String
+    val descripcionProblema: String,
+    // Agregar estado y fecha de solicitud para gestionar revisiones
+    val estadoSolicitud: String,
+    val fechaSolicitud: String,
+    // Campos adicionales para HU8
+    val motivoEdicion: String? = null,
+    val fechaReagendada: String? = null
 )
-

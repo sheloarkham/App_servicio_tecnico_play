@@ -13,7 +13,7 @@ import appserviciotecnico.model.entities.SolicitudEntity
         FormularioServicioEntity::class,
         SolicitudEntity::class
     ],
-    version = 1,
+    version = 2,  // 🔥 Incrementado a 2 para forzar recreación
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -31,7 +31,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_servicio_tecnico_db"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration() // 🔥 Permite recrear la DB si hay cambios de esquema
+                    .build()
                 INSTANCE = instance
                 instance
             }

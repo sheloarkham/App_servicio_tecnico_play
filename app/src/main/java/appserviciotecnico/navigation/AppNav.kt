@@ -141,7 +141,7 @@ private fun DrawerScaffold(
     val destinations = listOf(
         DrawerItem("Inicio", Routes.Home),
         DrawerItem("Catálogo de Servicios", Routes.Catalogo),
-        DrawerItem("Solicitar Servicio", Routes.Form),
+        DrawerItem("Solicitar Cotización", Routes.Form),
         DrawerItem("Mis Solicitudes", Routes.Estado)
     )
 
@@ -195,7 +195,7 @@ private data class DrawerItem(val label: String, val route: String)
 private fun appBarTitle(route: String?): String = when (route) {
     Routes.Home -> "Inicio"
     Routes.Catalogo -> "Catálogo de Servicios"
-    Routes.Form -> "Solicitar Servicio"
+    Routes.Form -> "Solicitar Cotización"
     Routes.Agendar -> "Agendar Servicio"
     Routes.Estado -> "Mis Solicitudes"
     else -> ""

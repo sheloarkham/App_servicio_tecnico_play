@@ -1,16 +1,20 @@
 package appserviciotecnico.ui.screen
 
 import android.app.Application
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.model.EstadoSolicitud
 import appserviciotecnico.model.Solicitud
@@ -19,8 +23,10 @@ import appserviciotecnico.viewmodel.EstadoSolicitudesViewModel
 import appserviciotecnico.viewmodel.EstadoSolicitudesViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.coroutines.delay
 
-// 📊 Pantalla para visualizar estado de solicitudes
+//  Pantalla para visualizar estado de solicitudes
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EstadoSolicitudesScreen() {
 
@@ -38,6 +44,14 @@ fun EstadoSolicitudesScreen() {
     // Solicitud seleccionada para ver detalles
     var solicitudSeleccionada by remember { mutableStateOf<Solicitud?>(null) }
 
+    // Estado para confirmación de eliminación
+    var solicitudAEliminar by remember { mutableStateOf<Solicitud?>(null) }
+    var mostrarDialogoEliminar by remember { mutableStateOf(false) }
+
+    // Estado para editar solicitud
+    var solicitudAEditar by remember { mutableStateOf<Solicitud?>(null) }
+    var mostrarDialogoEditar by remember { mutableStateOf(false) }
+
     // Filtrar solicitudes
     val solicitudesFiltradas = if (filtroSeleccionado == null) {
         solicitudes
@@ -51,6 +65,108 @@ fun EstadoSolicitudesScreen() {
             solicitud = solicitudSeleccionada!!,
             onDismiss = { solicitudSeleccionada = null }
         )
+    }
+
+    // Dialog de confirmación para eliminar
+    if (mostrarDialogoEliminar && solicitudAEliminar != null) {
+        AlertDialog(
+            onDismissRequest = {
+                mostrarDialogoEliminar = false
+                solicitudAEliminar = null
+            },
+            icon = {
+                Text(
+                    text = "🗑️",
+                    style = MaterialTheme.typography.displayMedium
+                )
+            },
+            title = {
+                Text(
+                    text = "Eliminar Solicitud",
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            },
+            text = {
+                Column {
+                    Text(
+                        text = "¿Estás seguro de que deseas eliminar esta solicitud?",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Servicio: ${solicitudAEliminar!!.servicio}",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.Medium
+                        ),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = "Esta acción no se puede deshacer.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error.copy(alpha = 0.8f),
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        solicitudAEliminar?.let { viewModel.eliminarSolicitud(it) }
+                        mostrarDialogoEliminar = false
+                        solicitudAEliminar = null
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text("Eliminar")
+                }
+            },
+            dismissButton = {
+                OutlinedButton(
+                    onClick = {
+                        mostrarDialogoEliminar = false
+                        solicitudAEliminar = null
+                    }
+                ) {
+                    Text("Cancelar")
+                }
+            }
+        )
+    }
+
+    // Dialog para editar solicitud
+    if (mostrarDialogoEditar && solicitudAEditar != null) {
+        AlertDialog(
+            onDismissRequest = {
+                mostrarDialogoEditar = false
+                solicitudAEditar = null
+            },
+            properties = DialogProperties(usePlatformDefaultWidth = false),
+            modifier = Modifier
+                .fillMaxWidth(0.95f)
+                .fillMaxHeight(0.9f)
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                shape = MaterialTheme.shapes.large,
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                EditarSolicitudScreen(
+                    solicitud = solicitudAEditar!!,
+                    onGuardado = {
+                        mostrarDialogoEditar = false
+                        solicitudAEditar = null
+                    },
+                    onCancelar = {
+                        mostrarDialogoEditar = false
+                        solicitudAEditar = null
+                    }
+                )
+            }
+        }
     }
 
     Column(
@@ -78,14 +194,33 @@ fun EstadoSolicitudesScreen() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp),
+                .padding(bottom = 16.dp)
+                .animateContentSize(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Botón "Todas"
+            // Botón "Todas" con animación
+            val scaleAll = remember { Animatable(1f) }
+
+            LaunchedEffect(filtroSeleccionado == null) {
+                if (filtroSeleccionado == null) {
+                    scaleAll.animateTo(
+                        1.1f,
+                        animationSpec = tween(100)
+                    )
+                    scaleAll.animateTo(
+                        1f,
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy
+                        )
+                    )
+                }
+            }
+
             FilterChip(
                 selected = filtroSeleccionado == null,
                 onClick = { filtroSeleccionado = null },
-                label = { Text("Todas (${solicitudes.size})") }
+                label = { Text("Todas (${solicitudes.size})") },
+                modifier = Modifier.scale(scaleAll.value)
             )
 
             // Filtros por estado
@@ -145,11 +280,43 @@ fun EstadoSolicitudesScreen() {
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(solicitudesFiltradas) { solicitud ->
-                    SolicitudCard(
-                        solicitud = solicitud,
-                        onVerDetalles = { solicitudSeleccionada = it }
-                    )
+                itemsIndexed(solicitudesFiltradas) { index, solicitud ->
+                    // Animación de entrada con delay escalonado
+                    var visible by remember { mutableStateOf(false) }
+
+                    LaunchedEffect(solicitud.id) {
+                        delay(index * 50L) // Delay de 50ms por cada tarjeta
+                        visible = true
+                    }
+
+                    AnimatedVisibility(
+                        visible = visible,
+                        enter = slideInVertically(
+                            initialOffsetY = { it / 2 },
+                            animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                        ) + fadeIn(
+                            animationSpec = tween(durationMillis = 300)
+                        )
+                    ) {
+                        SolicitudCard(
+                            solicitud = solicitud,
+                            modifier = Modifier.animateContentSize(
+                                animationSpec = spring(
+                                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                                    stiffness = Spring.StiffnessLow
+                                )
+                            ),
+                            onVerDetalles = { solicitudSeleccionada = it },
+                            onEditar = {
+                                solicitudAEditar = it
+                                mostrarDialogoEditar = true
+                            },
+                            onEliminar = {
+                                solicitudAEliminar = it
+                                mostrarDialogoEliminar = true
+                            }
+                        )
+                    }
                 }
 
                 // Espaciado final
@@ -167,7 +334,7 @@ fun DetallesSolicitudDialog(
     solicitud: Solicitud,
     onDismiss: () -> Unit
 ) {
-    val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val dateFormatter = SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", Locale.forLanguageTag("es-ES"))
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -203,7 +370,9 @@ fun DetallesSolicitudDialog(
                 HorizontalDivider()
 
                 // Fecha
-                DetailRow("Fecha:", dateFormatter.format(solicitud.fechaAgendada))
+                DetailRow("Fecha:", dateFormatter.format(solicitud.fechaAgendada).replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(Locale.forLanguageTag("es-ES")) else it.toString()
+                })
 
                 // Hora
                 DetailRow("Hora:", solicitud.horaAgendada)

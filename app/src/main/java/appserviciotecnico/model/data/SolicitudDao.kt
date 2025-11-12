@@ -17,6 +17,15 @@ interface SolicitudDao {
     @Query("SELECT * FROM solicitud_cita WHERE estado = :estado ORDER BY fechaAgendada DESC")
     fun getSolicitudesByEstado(estado: String): Flow<List<SolicitudEntity>>
 
+    @Query("SELECT * FROM solicitud_cita WHERE id = :id")
+    suspend fun getSolicitudById(id: Long): SolicitudEntity?
+
+    @Update
+    suspend fun updateSolicitud(solicitud: SolicitudEntity)
+
+    @Delete
+    suspend fun deleteSolicitud(solicitud: SolicitudEntity)
+
     @Query("DELETE FROM solicitud_cita")
     suspend fun deleteAll()
 }

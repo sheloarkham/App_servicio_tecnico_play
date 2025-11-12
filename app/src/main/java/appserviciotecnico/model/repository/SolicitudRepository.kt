@@ -12,8 +12,20 @@ class SolicitudRepository(
 
     fun obtenerSolicitudesPorEstado(estado: String) = dao.getSolicitudesByEstado(estado)
 
+    suspend fun obtenerSolicitudPorId(id: Long): SolicitudEntity? {
+        return dao.getSolicitudById(id)
+    }
+
     suspend fun guardarSolicitud(entity: SolicitudEntity): Long {
         return dao.insertSolicitud(entity)
+    }
+
+    suspend fun actualizarSolicitud(entity: SolicitudEntity) {
+        dao.updateSolicitud(entity)
+    }
+
+    suspend fun eliminarSolicitud(entity: SolicitudEntity) {
+        dao.deleteSolicitud(entity)
     }
 
     suspend fun limpiar() = dao.deleteAll()

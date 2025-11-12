@@ -43,7 +43,7 @@ fun AgendarServicioScreen(
     val scope = rememberCoroutineScope()
 
     // Formatters
-    val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val dateFormatter = SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", Locale.forLanguageTag("es-ES"))
 
     // DatePicker Dialog
     val datePickerDialog = DatePickerDialog(
@@ -213,7 +213,10 @@ fun AgendarServicioScreen(
             ) {
                 Text(
                     text = fechaSeleccionada?.let {
-                        "📅 ${dateFormatter.format(it)}"
+                        val fecha = dateFormatter.format(it).replaceFirstChar { char ->
+                            if (char.isLowerCase()) char.titlecase(Locale.forLanguageTag("es-ES")) else char.toString()
+                        }
+                        "📅 $fecha"
                     } ?: "Seleccionar fecha",
                     modifier = Modifier.padding(8.dp)
                 )

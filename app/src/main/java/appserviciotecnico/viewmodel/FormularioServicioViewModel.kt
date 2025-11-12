@@ -100,7 +100,9 @@ class FormularioServicioViewModel(
                     telefonoCliente = estadoActual.telefonoCliente,
                     tipoConsola = estadoActual.tipoConsola,
                     modeloConsola = estadoActual.modeloConsola,
-                    descripcionProblema = estadoActual.descripcionProblema
+                    descripcionProblema = estadoActual.descripcionProblema,
+                    estadoSolicitud = "Pendiente",  // Estado inicial
+                    fechaSolicitud = java.text.SimpleDateFormat("dd 'de' MMMM 'de' yyyy HH:mm", java.util.Locale.forLanguageTag("es-ES")).format(java.util.Date())
                 )
 
                 repository.guardarFormulario(entity)
@@ -108,7 +110,7 @@ class FormularioServicioViewModel(
                 _estado.update {
                     it.copy(
                         enviando = false,
-                        mensajeExito = "✅ Solicitud guardada exitosamente en la base de datos local."
+                        mensajeExito = "✅ Cotización solicitada exitosamente. Te contactaremos pronto con el presupuesto."
                     )
                 }
 
