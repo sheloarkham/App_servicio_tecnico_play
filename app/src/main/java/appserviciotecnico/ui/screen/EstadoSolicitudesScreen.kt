@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.model.EstadoSolicitud
 import appserviciotecnico.model.Solicitud
 import appserviciotecnico.ui.components.SolicitudCard
+import appserviciotecnico.utils.NativeResourcesHelper
 import appserviciotecnico.viewmodel.EstadoSolicitudesViewModel
 import appserviciotecnico.viewmodel.EstadoSolicitudesViewModelFactory
 import java.text.SimpleDateFormat
@@ -69,50 +70,17 @@ fun EstadoSolicitudesScreen() {
 
     // Dialog de confirmación para eliminar
     if (mostrarDialogoEliminar && solicitudAEliminar != null) {
+        val currentContext = context // Capturar context aquí
         AlertDialog(
             onDismissRequest = {
                 mostrarDialogoEliminar = false
                 solicitudAEliminar = null
             },
-            icon = {
-                Text(
-                    text = "🗑️",
-                    style = MaterialTheme.typography.displayMedium
-                )
-            },
-            title = {
-                Text(
-                    text = "Eliminar Solicitud",
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-            },
-            text = {
-                Column {
-                    Text(
-                        text = "¿Estás seguro de que deseas eliminar esta solicitud?",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Servicio: ${solicitudAEliminar!!.servicio}",
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            fontWeight = FontWeight.Medium
-                        ),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                    Text(
-                        text = "Esta acción no se puede deshacer.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.error.copy(alpha = 0.8f),
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                }
-            },
+            // ...existing code...
             confirmButton = {
                 Button(
                     onClick = {
+                        NativeResourcesHelper.vibrarError(currentContext)
                         solicitudAEliminar?.let { viewModel.eliminarSolicitud(it) }
                         mostrarDialogoEliminar = false
                         solicitudAEliminar = null
@@ -336,6 +304,20 @@ fun DetallesSolicitudDialog(
     onDismiss: () -> Unit
 ) {
     val dateFormatter = SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", Locale.forLanguageTag("es-ES"))
+    val context = LocalContext.current
+
+    // Crear texto para compartir/email
+    val textoCompartir = """
+        📋 Solicitud de Servicio Técnico PlayStation
+        
+        ID: #${solicitud.id.toString().padStart(4, '0')}
+        Servicio: ${solicitud.servicio}
+        Estado: ${solicitud.estado.texto}
+        Fecha: ${dateFormatter.format(solicitud.fechaAgendada)}
+        Hora: ${solicitud.horaAgendada}
+        
+        Descripción: ${solicitud.descripcion}
+    """.trimIndent()
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -453,8 +435,37 @@ fun DetallesSolicitudDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cerrar")
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                // Botón Compartir
+                OutlinedButton(
+                    onClick = {
+                        NativeResourcesHelper.vibrar(context)
+                        NativeResourcesHelper.compartirSolicitud(context, textoCompartir)
+                    }
+                ) {
+                    Text("📤 Compartir")
+                }
+
+                // Botón Email
+                OutlinedButton(
+                    onClick = {
+                        NativeResourcesHelper.vibrar(context)
+                        NativeResourcesHelper.enviarCorreo(
+                            context = context,
+                            asunto = "Solicitud #${solicitud.id} - Servicio PlayStation",
+                            cuerpo = textoCompartir
+                        )
+                    }
+                ) {
+                    Text("📧 Email")
+                }
+
+                // Botón Cerrar
+                Button(onClick = onDismiss) {
+                    Text("Cerrar")
+                }
             }
         }
     )

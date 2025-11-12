@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import appserviciotecnico.model.data.AppDatabase
 import appserviciotecnico.model.entities.SolicitudEntity
 import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.utils.NativeResourcesHelper
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -132,8 +133,41 @@ fun AgendarServicioScreen(
                 }
             },
             confirmButton = {
-                TextButton(onClick = { mostrarConfirmacion = false }) {
-                    Text("Aceptar")
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    TextButton(
+                        onClick = {
+                            // Agregar al calendario
+                            fechaSeleccionada?.let { fecha ->
+                                horaSeleccionada?.let { (hora, minuto) ->
+                                    val calendar = Calendar.getInstance().apply {
+                                        time = fecha
+                                        set(Calendar.HOUR_OF_DAY, hora)
+                                        set(Calendar.MINUTE, minuto)
+                                    }
+
+                                    NativeResourcesHelper.agregarCitaAlCalendario(
+                                        context = context,
+                                        titulo = "Servicio Técnico PlayStation - $categoriaNombre",
+                                        descripcion = "Cita para servicio técnico de PlayStation en nuestro taller.",
+                                        fechaInicio = calendar.timeInMillis,
+                                        duracionMinutos = 60
+                                    )
+                                    NativeResourcesHelper.vibrarExito(context)
+                                }
+                            }
+                        }
+                    ) {
+                        Text("📅 Agregar al Calendario")
+                    }
+
+                    Button(onClick = {
+                        NativeResourcesHelper.vibrarExito(context)
+                        mostrarConfirmacion = false
+                    }) {
+                        Text("Aceptar")
+                    }
                 }
             }
         )

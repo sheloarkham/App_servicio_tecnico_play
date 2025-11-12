@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.ui.components.InputText
+import appserviciotecnico.utils.NativeResourcesHelper
 import appserviciotecnico.viewmodel.FormularioServicioViewModel
 import appserviciotecnico.viewmodel.FormularioServicioViewModelFactory
 
@@ -216,6 +217,17 @@ fun FormularioServicioScreen() {
             maxLines = 5
         )
 
+        // 📷 Botón para adjuntar foto
+        OutlinedButton(
+            onClick = {
+                NativeResourcesHelper.vibrar(context)
+                NativeResourcesHelper.abrirCamara(context)
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("📷 Adjuntar Foto de la Consola")
+        }
+
         Spacer(modifier = Modifier.height(24.dp))
 
         // ✅ Mensaje de éxito con animación
@@ -255,7 +267,10 @@ fun FormularioServicioScreen() {
 
         // 🔘 Botón enviar
         Button(
-            onClick = viewModel::onEnviarFormulario,
+            onClick = {
+                viewModel.onEnviarFormulario()
+                NativeResourcesHelper.vibrarExito(context)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
