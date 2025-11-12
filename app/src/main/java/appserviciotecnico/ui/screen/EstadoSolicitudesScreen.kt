@@ -139,6 +139,7 @@ fun EstadoSolicitudesScreen() {
 
     // Dialog para editar solicitud
     if (mostrarDialogoEditar && solicitudAEditar != null) {
+        @Suppress("DEPRECATION")
         AlertDialog(
             onDismissRequest = {
                 mostrarDialogoEditar = false
