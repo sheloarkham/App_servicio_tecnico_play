@@ -160,7 +160,91 @@ implementation("androidx.room:room-ktx:2.6.1")
 
 // ViewModel
 implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
+// Testing - JUnit (incluido por defecto)
+testImplementation("junit:junit:4.13.2")
 ```
+
+## 🧪 Tests Unitarios
+
+El proyecto incluye **tests unitarios** para garantizar la calidad del código y validar la lógica de negocio.
+
+### 📊 Tests Implementados
+
+#### ✅ FormularioValidacionTest.kt (10 tests)
+- Validación de correo vacío
+- Validación de correo sin @ (inválido)
+- Validación de correo con @ (válido)
+- Validación de nombre vacío y con texto
+- Validación de teléfono vacío
+- Validación de descripción del problema
+- Validación de tipo de consola
+- Verificación de método hasErrors()
+- Verificación de estado inicial del formulario
+
+#### ✅ HorarioLaboralTest.kt (10 tests)
+- Validación hora antes de 10:00 AM (inválida)
+- Validación hora después de 6:00 PM (inválida)
+- Validación domingo (no laboral)
+- Validación días laborales (L-S) con horarios válidos
+- Validación sábado como día laboral
+- Validación horas exactas (9 AM, 10 AM)
+- Validación diferentes horarios dentro del rango
+
+#### ✅ EstadoSolicitudTest.kt (10 tests)
+- Solicitud inicia en estado PENDIENTE
+- Cambio de estado a EN_PROCESO y COMPLETADO
+- Verificación de íconos por estado (🟡🔵🟢🔴)
+- Verificación de textos descriptivos
+- Estados únicos con íconos distintos
+- Cambio de PENDIENTE a CANCELADO
+- Datos se mantienen al cambiar estado
+- Copy de objetos inmutables
+
+### 🎯 Cobertura de Tests
+
+**Total de tests:** 30 tests unitarios  
+**Framework:** JUnit 4  
+**Tipo:** Tests de lógica pura (sin mocks ni dependencias externas)  
+**Estado:** ✅ Todos los tests pasan
+
+### ▶️ Ejecutar Tests
+
+**Desde la terminal (PowerShell/CMD):**
+
+```powershell
+# Ejecutar todos los tests
+.\gradlew.bat test
+
+# Ejecutar tests con reporte detallado
+.\gradlew.bat test --info
+
+# Ver resultados en navegador
+.\gradlew.bat test
+# Abrir: app\build\reports\tests\testDebugUnitTest\index.html
+```
+
+**Desde Android Studio:**
+1. Clic derecho en `app/src/test/java/appserviciotecnico/`
+2. Seleccionar **Run 'Tests in appserviciotecnico'**
+3. Ver resultados en la pestaña **Run**
+
+### 📈 Resultados Esperados
+
+```
+FormularioValidacionTest > 10 tests PASSED
+HorarioLaboralTest > 10 tests PASSED  
+EstadoSolicitudTest > 10 tests PASSED
+
+BUILD SUCCESSFUL in 5s
+```
+
+### 🧪 Metodología de Testing
+
+- **Given-When-Then**: Estructura clara de cada test
+- **Assertions descriptivas**: Mensajes claros en caso de fallos
+- **Tests unitarios puros**: Sin dependencias de Android Framework
+- **Nomenclatura clara**: Nombres de tests autodescriptivos
 
 ## 🚀 Pasos para Ejecutar
 
