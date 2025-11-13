@@ -12,31 +12,32 @@ class GuardarSolicitudUseCase(
 ) {
 
     suspend fun execute(
-        servicioId: Int,
-        servicioNombre: String,
-        fecha: String,
-        hora: String,
-        descripcion: String
+        servicio: String,
+        categoriaId: Int,
+        fechaAgendada: Long,  // Timestamp
+        horaAgendada: String,
+        descripcion: String,
+        clienteNombre: String = ""
     ): Result<Long> {
         return try {
             // Validar datos antes de guardar
-            if (servicioNombre.isBlank()) {
+            if (servicio.isBlank()) {
                 return Result.failure(Exception("El servicio es requerido"))
             }
 
-            if (fecha.isBlank() || hora.isBlank()) {
-                return Result.failure(Exception("Fecha y hora son requeridas"))
+            if (horaAgendada.isBlank()) {
+                return Result.failure(Exception("La hora es requerida"))
             }
 
             // Crear entidad
             val solicitud = SolicitudEntity(
-                servicioId = servicioId,
-                servicioNombre = servicioNombre,
-                fecha = fecha,
-                hora = hora,
+                servicio = servicio,
+                categoriaId = categoriaId,
+                fechaAgendada = fechaAgendada,
+                horaAgendada = horaAgendada,
                 estado = "PENDIENTE",
                 descripcion = descripcion,
-                clienteNombre = "" // Se puede agregar desde sesión
+                clienteNombre = clienteNombre
             )
 
             // Guardar en repositorio

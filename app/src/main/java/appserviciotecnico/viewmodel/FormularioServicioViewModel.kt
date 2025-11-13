@@ -2,7 +2,7 @@ package appserviciotecnico.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.FormularioServicioErrores
+import appserviciotecnico.model.domain.FormularioServicioErrores
 import appserviciotecnico.model.entities.FormularioServicioEntity
 import appserviciotecnico.model.repository.FormularioServicioRepository
 import kotlinx.coroutines.flow.MutableStateFlow

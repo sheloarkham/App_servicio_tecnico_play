@@ -1,4 +1,4 @@
-package appserviciotecnico.model
+package appserviciotecnico.model.domain
 
 // 🛠️ Modelo de datos para representar un servicio técnico
 @Suppress("unused")

@@ -1,6 +1,6 @@
 package appserviciotecnico.viewmodel
 
-import appserviciotecnico.model.FormularioServicioErrores
+import appserviciotecnico.model.domain.FormularioServicioErrores
 
 // 🎯 Estado del formulario de servicio
 data class FormularioServicioState(

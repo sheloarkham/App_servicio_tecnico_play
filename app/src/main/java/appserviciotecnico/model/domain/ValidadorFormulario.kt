@@ -1,6 +1,5 @@
 package appserviciotecnico.model.domain
 
-import appserviciotecnico.model.FormularioServicioErrores
 
 /**
  * 🔍 Validador de formularios de servicio técnico

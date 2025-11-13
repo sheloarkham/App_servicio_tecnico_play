@@ -1,4 +1,4 @@
-package appserviciotecnico.model
+package appserviciotecnico.model.domain
 
 // Modelo para representar el estado de autenticación del usuario
 @Suppress("unused")

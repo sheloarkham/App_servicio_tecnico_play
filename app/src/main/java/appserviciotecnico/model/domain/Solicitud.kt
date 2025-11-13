@@ -1,6 +1,5 @@
-package appserviciotecnico.model
+package appserviciotecnico.model.domain
 
-import java.text.SimpleDateFormat
 import java.util.*
 
 // 📋 Modelo de datos para representar una solicitud de servicio

@@ -16,8 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
-import appserviciotecnico.model.EstadoSolicitud
-import appserviciotecnico.model.Solicitud
+import appserviciotecnico.model.domain.EstadoSolicitud
+import appserviciotecnico.model.domain.Solicitud
 import appserviciotecnico.ui.components.SolicitudCard
 import appserviciotecnico.utils.NativeResourcesHelper
 import appserviciotecnico.viewmodel.EstadoSolicitudesViewModel

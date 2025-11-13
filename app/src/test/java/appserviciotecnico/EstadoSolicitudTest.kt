@@ -1,7 +1,7 @@
 package appserviciotecnico
 
-import appserviciotecnico.model.EstadoSolicitud
-import appserviciotecnico.model.Solicitud
+import appserviciotecnico.model.domain.EstadoSolicitud
+import appserviciotecnico.model.domain.Solicitud
 import org.junit.Assert.*
 import org.junit.Test
 import java.util.*

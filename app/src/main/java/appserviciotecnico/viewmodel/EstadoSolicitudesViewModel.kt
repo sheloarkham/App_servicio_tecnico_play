@@ -2,8 +2,8 @@ package appserviciotecnico.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.Solicitud
-import appserviciotecnico.model.EstadoSolicitud
+import appserviciotecnico.model.domain.Solicitud
+import appserviciotecnico.model.domain.EstadoSolicitud
 import appserviciotecnico.model.entities.SolicitudEntity
 import appserviciotecnico.model.repository.SolicitudRepository
 import kotlinx.coroutines.flow.SharingStarted

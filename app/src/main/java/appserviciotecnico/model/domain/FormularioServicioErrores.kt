@@ -1,4 +1,4 @@
-package appserviciotecnico.model
+package appserviciotecnico.model.domain
 
 // ⚠️ Clase para manejar errores del formulario de servicio
 @Suppress("unused", "MemberVisibilityCanBePrivate")

@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import appserviciotecnico.model.EstadoSolicitud
-import appserviciotecnico.model.Solicitud
+import appserviciotecnico.model.domain.EstadoSolicitud
+import appserviciotecnico.model.domain.Solicitud
 import java.text.SimpleDateFormat
 import java.util.*
 
