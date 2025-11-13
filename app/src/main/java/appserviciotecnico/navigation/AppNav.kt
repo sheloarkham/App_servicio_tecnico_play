@@ -59,7 +59,12 @@ fun AppNav() {
                 drawerState = drawerState,
                 scope = scope
             ) {
-                HomeScreen()
+                HomeScreen(
+                    onNavigateToCatalog = { nav.navigate(Routes.Catalogo) },
+                    onNavigateToAgendar = { nav.navigate(Routes.Agendar) },
+                    onNavigateToSolicitudes = { nav.navigate(Routes.Estado) },
+                    onNavigateToFormulario = { nav.navigate(Routes.Form) }
+                )
             }
         }
 

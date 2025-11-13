@@ -1,138 +1,253 @@
 package appserviciotecnico.ui.screen
 
-import androidx.compose.foundation.background
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import appserviciotecnico.utils.NativeResourcesHelper
+import androidx.lifecycle.viewmodel.compose.viewModel
+import appserviciotecnico.ui.components.*
+import appserviciotecnico.viewmodel.HomeViewModel
+import appserviciotecnico.viewmodel.HomeViewModelFactory
 
-// 🏠 Pantalla principal después del login
+//  Pantalla de inicio mejorada con dashboard
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onNavigateToCatalog: () -> Unit = {},
+    onNavigateToAgendar: () -> Unit = {},
+    onNavigateToSolicitudes: () -> Unit = {},
+    onNavigateToFormulario: () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
-
-    // 🎨 Gradiente azulado suave para el fondo
-    val gradientBrush = Brush.verticalGradient(
-        colors = listOf(
-            Color(0xFFE3F2FD),  // Azul muy claro
-            Color(0xFFBBDEFB),  // Azul claro
-            Color(0xFF90CAF9)   // Azul medio claro
-        )
+    val viewModel: HomeViewModel = viewModel(
+        factory = HomeViewModelFactory(context.applicationContext as android.app.Application)
     )
+    val estado by viewModel.estado.collectAsState()
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(brush = gradientBrush)
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            // Card principal de bienvenida
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White
-                ),
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onNavigateToFormulario,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(32.dp)
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Solicitar servicio"
+                )
+            }
+        }
+    ) { padding ->
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(padding),
+            contentPadding = PaddingValues(bottom = 80.dp)
+        ) {
+            // Header con saludo
+            item {
+                AnimatedVisibility(
+                    visible = true,
+                    enter = fadeIn() + slideInVertically(
+                        initialOffsetY = { -40 }
+                    )
                 ) {
-                    Text(
-                        text = "🎮 Bienvenido",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = Color(0xFF0099CC),
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    Text(
-                        text = "Soporte Técnico PlayStation",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = Color(0xFF0A2342),
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-                    Text(
-                        text = "PS4 • PS5",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color(0xFF00D9FF),
-                        modifier = Modifier.padding(bottom = 24.dp)
-                    )
-                    Text(
-                        text = "Navega por el menú para explorar nuestros servicios",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color(0xFF666666),
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
+                    HomeHeader(nombreUsuario = estado.nombreUsuario)
                 }
             }
 
-            // Botones de recursos nativos
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                // Botón Llamar a Soporte
-                Button(
-                    onClick = {
-                        NativeResourcesHelper.vibrar(context)
-                        NativeResourcesHelper.llamarSoporteTecnico(context)
-                    },
-                    modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
-                    )
+            // Banner informativo
+            item {
+                AnimatedVisibility(
+                    visible = true,
+                    enter = fadeIn(animationSpec = tween(durationMillis = 600, delayMillis = 100))
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Call,
-                        contentDescription = "Llamar",
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Llamar")
+                    PromoBanner(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
                 }
+            }
 
-                // Botón Ver Ubicación
-                Button(
-                    onClick = {
-                        NativeResourcesHelper.vibrar(context)
-                        NativeResourcesHelper.abrirUbicacionEnMaps(context)
-                    },
-                    modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF2196F3)
+            // Sección de estadísticas
+            item {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Mis Solicitudes",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(bottom = 12.dp)
                     )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.LocationOn,
-                        contentDescription = "Ubicación",
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Ubicación")
+
+                    if (!estado.isLoading) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            SummaryCard(
+                                title = "Pendientes",
+                                value = estado.solicitudesPendientes.toString(),
+                                icon = Icons.Default.Warning,
+                                iconColor = Color(0xFFFFA726),
+                                modifier = Modifier.weight(1f)
+                            )
+                            SummaryCard(
+                                title = "Completadas",
+                                value = estado.solicitudesCompletadas.toString(),
+                                icon = Icons.Default.CheckCircle,
+                                iconColor = Color(0xFF66BB6A),
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
                 }
+            }
+
+            // Próxima cita
+            estado.proximaCita?.let { cita ->
+                item {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                        )
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.DateRange,
+                                contentDescription = "Próxima cita",
+                                tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                                modifier = Modifier.size(40.dp)
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Column {
+                                Text(
+                                    text = "Próxima Cita",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.7f)
+                                )
+                                Text(
+                                    text = cita.servicio,
+                                    style = MaterialTheme.typography.titleMedium.copy(
+                                        fontWeight = FontWeight.Bold
+                                    ),
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                                )
+                                Text(
+                                    text = "${cita.fecha} a las ${cita.hora}",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Accesos rápidos
+            item {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Accesos Rápidos",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+
+                    val quickAccessItems = listOf(
+                        QuickAccessItem(
+                            "Catálogo de Servicios",
+                            Icons.Default.Build,
+                            listOf(Color(0xFF1E88E5), Color(0xFF1565C0)),
+                            onNavigateToCatalog
+                        ),
+                        QuickAccessItem(
+                            "Agendar Cita",
+                            Icons.Default.DateRange,
+                            listOf(Color(0xFF43A047), Color(0xFF2E7D32)),
+                            onNavigateToAgendar
+                        ),
+                        QuickAccessItem(
+                            "Mis Solicitudes",
+                            Icons.Default.List,
+                            listOf(Color(0xFFFF7043), Color(0xFFE64A19)),
+                            onNavigateToSolicitudes
+                        ),
+                        QuickAccessItem(
+                            "Cotización",
+                            Icons.Default.Edit,
+                            listOf(Color(0xFF8E24AA), Color(0xFF6A1B9A)),
+                            onNavigateToFormulario
+                        )
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        quickAccessItems.take(2).forEach { item ->
+                            QuickAccessCard(
+                                title = item.title,
+                                icon = item.icon,
+                                gradientColors = item.colors,
+                                onClick = item.onClick,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        quickAccessItems.drop(2).forEach { item ->
+                            QuickAccessCard(
+                                title = item.title,
+                                icon = item.icon,
+                                gradientColors = item.colors,
+                                onClick = item.onClick,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Botones de contacto
+            item {
+                ContactButtons(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                )
             }
         }
     }
 }
+
+private data class QuickAccessItem(
+    val title: String,
+    val icon: androidx.compose.ui.graphics.vector.ImageVector,
+    val colors: List<Color>,
+    val onClick: () -> Unit
+)
 
