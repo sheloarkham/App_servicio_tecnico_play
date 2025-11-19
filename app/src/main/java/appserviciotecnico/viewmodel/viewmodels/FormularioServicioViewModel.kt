@@ -1,10 +1,12 @@
-package appserviciotecnico.viewmodel
+package appserviciotecnico.viewmodel.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.domain.validators.FormularioServicioErrores
 import appserviciotecnico.model.data.entities.FormularioServicioEntity
 import appserviciotecnico.model.data.repository.FormularioServicioRepository
+import appserviciotecnico.model.domain.validators.FormularioServicioErrores
+import appserviciotecnico.viewmodel.states.FormularioServicioState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -105,7 +107,10 @@ class FormularioServicioViewModel(
                     modeloConsola = estadoActual.modeloConsola,
                     descripcionProblema = estadoActual.descripcionProblema,
                     estadoSolicitud = "Pendiente",  // Estado inicial
-                    fechaSolicitud = SimpleDateFormat("dd 'de' MMMM 'de' yyyy HH:mm", Locale.forLanguageTag("es-ES")).format(
+                    fechaSolicitud = SimpleDateFormat(
+                        "dd 'de' MMMM 'de' yyyy HH:mm",
+                        Locale.forLanguageTag("es-ES")
+                    ).format(
                         Date()
                     )
                 )
@@ -120,7 +125,7 @@ class FormularioServicioViewModel(
                 }
 
                 // Limpiar formulario después de 2 segundos
-                kotlinx.coroutines.delay(2000)
+                delay(2000)
                 limpiarFormulario()
 
             } catch (e: Exception) {

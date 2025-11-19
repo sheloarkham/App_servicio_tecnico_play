@@ -1,4 +1,4 @@
-package appserviciotecnico.viewmodel
+package appserviciotecnico.viewmodel.states
 
 import appserviciotecnico.model.domain.validators.FormularioServicioErrores
 
@@ -21,4 +21,3 @@ data class FormularioServicioState(
     val enviando: Boolean = false,
     val mensajeExito: String? = null
 )
-

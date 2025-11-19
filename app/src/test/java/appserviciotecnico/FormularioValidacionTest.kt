@@ -1,7 +1,7 @@
 package appserviciotecnico
 
 import appserviciotecnico.model.domain.validators.ValidadorFormulario
-import appserviciotecnico.viewmodel.FormularioServicioState
+import appserviciotecnico.viewmodel.states.FormularioServicioState
 import org.junit.Assert.*
 import org.junit.Test
 

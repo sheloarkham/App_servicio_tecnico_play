@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.ui.components.InputText
 import appserviciotecnico.utils.NativeResourcesHelper
-import appserviciotecnico.viewmodel.FormularioServicioViewModel
-import appserviciotecnico.viewmodel.FormularioServicioViewModelFactory
+import appserviciotecnico.viewmodel.viewmodels.FormularioServicioViewModel
+import appserviciotecnico.viewmodel.factories.FormularioServicioViewModelFactory
 
 // Pantalla de formulario de servicio técnico PlayStation
 @OptIn(ExperimentalMaterial3Api::class)

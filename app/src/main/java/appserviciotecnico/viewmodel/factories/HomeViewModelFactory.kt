@@ -1,8 +1,9 @@
-package appserviciotecnico.viewmodel
+package appserviciotecnico.viewmodel.factories
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import appserviciotecnico.viewmodel.viewmodels.HomeViewModel
 
 // 🏭 Factory para crear HomeViewModel con dependencias
 class HomeViewModelFactory(
@@ -16,4 +17,3 @@ class HomeViewModelFactory(
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-

@@ -1,10 +1,12 @@
-package appserviciotecnico.viewmodel
+package appserviciotecnico.viewmodel.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import appserviciotecnico.model.data.config.AppDatabase
 import appserviciotecnico.model.data.repository.SolicitudRepository
+import appserviciotecnico.viewmodel.states.HomeState
+import appserviciotecnico.viewmodel.states.ProximaCita
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,7 +24,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val estado: StateFlow<HomeState> = _estado.asStateFlow()
 
     init {
-        val database = AppDatabase.getDatabase(application)
+        val database = AppDatabase.Companion.getDatabase(application)
         repository = SolicitudRepository(database.solicitudDao())
         cargarDatos()
     }
@@ -70,4 +72,3 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         cargarDatos()
     }
 }
-

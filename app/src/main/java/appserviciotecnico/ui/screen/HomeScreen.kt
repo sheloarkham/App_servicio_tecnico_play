@@ -1,5 +1,6 @@
 package appserviciotecnico.ui.screen
 
+import android.app.Application
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
@@ -17,8 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.ui.components.*
-import appserviciotecnico.viewmodel.HomeViewModel
-import appserviciotecnico.viewmodel.HomeViewModelFactory
+import appserviciotecnico.viewmodel.viewmodels.HomeViewModel
+import appserviciotecnico.viewmodel.factories.HomeViewModelFactory
 
 //  Pantalla de inicio mejorada con dashboard
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +33,7 @@ fun HomeScreen(
 ) {
     val context = LocalContext.current
     val viewModel: HomeViewModel = viewModel(
-        factory = HomeViewModelFactory(context.applicationContext as android.app.Application)
+        factory = HomeViewModelFactory(context.applicationContext as Application)
     )
     val estado by viewModel.estado.collectAsState()
 

@@ -20,8 +20,8 @@ import appserviciotecnico.model.domain.models.EstadoSolicitud
 import appserviciotecnico.model.domain.models.Solicitud
 import appserviciotecnico.ui.components.SolicitudCard
 import appserviciotecnico.utils.NativeResourcesHelper
-import appserviciotecnico.viewmodel.EstadoSolicitudesViewModel
-import appserviciotecnico.viewmodel.EstadoSolicitudesViewModelFactory
+import appserviciotecnico.viewmodel.viewmodels.EstadoSolicitudesViewModel
+import appserviciotecnico.viewmodel.factories.EstadoSolicitudesViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.delay

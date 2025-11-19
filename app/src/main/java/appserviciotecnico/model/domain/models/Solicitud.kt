@@ -20,10 +20,10 @@ enum class EstadoSolicitud(
     val icono: String,
     val color: Long // Color en formato 0xFFRRGGBB
 ) {
-    PENDIENTE("Pendiente", "P", 0xFFFFA726),
-    EN_PROCESO("En Proceso", "E", 0xFF42A5F5),
-    COMPLETADO("Completado", "C", 0xFF66BB6A),
-    CANCELADO("Cancelado", "X", 0xFFEF5350)
+    PENDIENTE("Pendiente", "🟡", 0xFFFFA726),
+    EN_PROCESO("En Proceso", "🔵", 0xFF42A5F5),
+    COMPLETADO("Completado", "✅", 0xFF66BB6A),
+    CANCELADO("Cancelado", "❌", 0xFFEF5350)
 }
 
 // Companion object con datos de ejemplo

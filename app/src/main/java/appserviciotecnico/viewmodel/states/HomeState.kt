@@ -1,4 +1,4 @@
-package appserviciotecnico.viewmodel
+package appserviciotecnico.viewmodel.states
 
 // 🏠 Estado de la pantalla de inicio
 data class HomeState(

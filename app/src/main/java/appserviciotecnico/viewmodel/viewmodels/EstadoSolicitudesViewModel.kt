@@ -1,17 +1,17 @@
-package appserviciotecnico.viewmodel
+package appserviciotecnico.viewmodel.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.domain.models.Solicitud
-import appserviciotecnico.model.domain.models.EstadoSolicitud
 import appserviciotecnico.model.data.entities.SolicitudEntity
 import appserviciotecnico.model.data.repository.SolicitudRepository
+import appserviciotecnico.model.domain.models.EstadoSolicitud
+import appserviciotecnico.model.domain.models.Solicitud
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Date
 
 // ViewModel para gestionar estado de solicitudes
 class EstadoSolicitudesViewModel(
@@ -46,7 +46,7 @@ class EstadoSolicitudesViewModel(
         }
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Companion.WhileSubscribed(5000),
             initialValue = emptyList()
         )
 
@@ -67,4 +67,3 @@ class EstadoSolicitudesViewModel(
         }
     }
 }
-

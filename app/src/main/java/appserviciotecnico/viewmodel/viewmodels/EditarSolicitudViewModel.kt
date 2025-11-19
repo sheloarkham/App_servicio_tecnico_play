@@ -1,15 +1,15 @@
-package appserviciotecnico.viewmodel
+package appserviciotecnico.viewmodel.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.domain.models.Solicitud
 import appserviciotecnico.model.data.entities.SolicitudEntity
 import appserviciotecnico.model.data.repository.SolicitudRepository
+import appserviciotecnico.model.domain.models.Solicitud
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Date
 
 // ✏️ ViewModel para editar fecha y hora de una solicitud
 class EditarSolicitudViewModel(
@@ -82,4 +82,3 @@ class EditarSolicitudViewModel(
         }
     }
 }
-

@@ -27,7 +27,7 @@ data class CategoriaServicio(
                 id = 1,
                 nombre = "Diagnóstico y Limpieza",
                 descripcion = "Revisión completa, limpieza interna y prevención de sobrecalentamiento",
-                icono = "D",
+                icono = "🔍",
                 serviciosIncluidos = listOf(
                     "Diagnóstico general de la consola",
                     "Limpieza interna completa",
@@ -41,7 +41,7 @@ data class CategoriaServicio(
                 id = 2,
                 nombre = "Reparación de Hardware",
                 descripcion = "Solución de problemas físicos y componentes dañados",
-                icono = "H",
+                icono = "🔧",
                 serviciosIncluidos = listOf(
                     "Reparación de encendido",
                     "Reparación de fuente de alimentación",
@@ -55,7 +55,7 @@ data class CategoriaServicio(
                 id = 3,
                 nombre = "Lector y Almacenamiento",
                 descripcion = "Reparación de lectores de discos y actualización de almacenamiento",
-                icono = "A",
+                icono = "💿",
                 serviciosIncluidos = listOf(
                     "Reparación lector Blu-ray",
                     "Cambio de disco duro HDD",
@@ -69,7 +69,7 @@ data class CategoriaServicio(
                 id = 4,
                 nombre = "Sistema de Refrigeración",
                 descripcion = "Solución de sobrecalentamiento y mejora de ventilación",
-                icono = "R",
+                icono = "❄️",
                 serviciosIncluidos = listOf(
                     "Reparación de ventiladores",
                     "Reemplazo de disipadores",
@@ -83,7 +83,7 @@ data class CategoriaServicio(
                 id = 5,
                 nombre = "Software y Firmware",
                 descripcion = "Actualización, configuración y solución de problemas de software",
-                icono = "S",
+                icono = "💻",
                 serviciosIncluidos = listOf(
                     "Actualización de firmware",
                     "Instalación limpia del sistema",
@@ -97,7 +97,7 @@ data class CategoriaServicio(
                 id = 6,
                 nombre = "Controles y Accesorios",
                 descripcion = "Reparación de mandos DualShock y DualSense",
-                icono = "C",
+                icono = "🎮",
                 serviciosIncluidos = listOf(
                     "Reparación de drift en joysticks",
                     "Cambio de botones y gatillos",
@@ -111,7 +111,7 @@ data class CategoriaServicio(
                 id = 7,
                 nombre = "Conectividad y Puertos",
                 descripcion = "Reparación de puertos USB, HDMI y otros conectores",
-                icono = "P",
+                icono = "🔌",
                 serviciosIncluidos = listOf(
                     "Reparación puerto HDMI",
                     "Reparación puertos USB",
@@ -125,7 +125,7 @@ data class CategoriaServicio(
                 id = 8,
                 nombre = "Mantenimiento Preventivo",
                 descripcion = "Revisión periódica y mantenimiento programado",
-                icono = "M",
+                icono = "🛠️",
                 serviciosIncluidos = listOf(
                     "Mantenimiento semestral/anual",
                     "Revisión de componentes",
@@ -139,7 +139,7 @@ data class CategoriaServicio(
                 id = 9,
                 nombre = "Personalización",
                 descripcion = "Modificaciones estéticas y mejoras de rendimiento",
-                icono = "E",
+                icono = "✨",
                 serviciosIncluidos = listOf(
                     "Cambio de carcasa",
                     "Instalación de LED personalizados",

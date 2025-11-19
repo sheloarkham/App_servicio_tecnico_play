@@ -12,8 +12,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.model.domain.models.Solicitud
-import appserviciotecnico.viewmodel.EditarSolicitudViewModel
-import appserviciotecnico.viewmodel.EditarSolicitudViewModelFactory
+import appserviciotecnico.viewmodel.viewmodels.EditarSolicitudViewModel
+import appserviciotecnico.viewmodel.factories.EditarSolicitudViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
