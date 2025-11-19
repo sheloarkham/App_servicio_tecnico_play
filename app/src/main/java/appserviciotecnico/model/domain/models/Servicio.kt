@@ -1,4 +1,4 @@
-package appserviciotecnico.model.domain
+package appserviciotecnico.model.domain.models
 
 // 🛠️ Modelo de datos para representar un servicio técnico
 @Suppress("unused")
@@ -11,7 +11,7 @@ data class Servicio(
     val categoria: String
 )
 
-// 📦 Categoría de servicios
+// Categoría de servicios
 data class CategoriaServicio(
     val id: Int,
     val nombre: String,
@@ -21,13 +21,13 @@ data class CategoriaServicio(
 ) {
     @Suppress("unused")
     companion object {
-        // 📋 Categorías principales de servicios
+        // Categorías principales de servicios
         fun obtenerCategorias(): List<CategoriaServicio> = listOf(
             CategoriaServicio(
                 id = 1,
                 nombre = "Diagnóstico y Limpieza",
                 descripcion = "Revisión completa, limpieza interna y prevención de sobrecalentamiento",
-                icono = "🔍",
+                icono = "D",
                 serviciosIncluidos = listOf(
                     "Diagnóstico general de la consola",
                     "Limpieza interna completa",
@@ -41,7 +41,7 @@ data class CategoriaServicio(
                 id = 2,
                 nombre = "Reparación de Hardware",
                 descripcion = "Solución de problemas físicos y componentes dañados",
-                icono = "🔧",
+                icono = "H",
                 serviciosIncluidos = listOf(
                     "Reparación de encendido",
                     "Reparación de fuente de alimentación",
@@ -55,7 +55,7 @@ data class CategoriaServicio(
                 id = 3,
                 nombre = "Lector y Almacenamiento",
                 descripcion = "Reparación de lectores de discos y actualización de almacenamiento",
-                icono = "💾",
+                icono = "A",
                 serviciosIncluidos = listOf(
                     "Reparación lector Blu-ray",
                     "Cambio de disco duro HDD",
@@ -69,7 +69,7 @@ data class CategoriaServicio(
                 id = 4,
                 nombre = "Sistema de Refrigeración",
                 descripcion = "Solución de sobrecalentamiento y mejora de ventilación",
-                icono = "🌀",
+                icono = "R",
                 serviciosIncluidos = listOf(
                     "Reparación de ventiladores",
                     "Reemplazo de disipadores",
@@ -83,7 +83,7 @@ data class CategoriaServicio(
                 id = 5,
                 nombre = "Software y Firmware",
                 descripcion = "Actualización, configuración y solución de problemas de software",
-                icono = "💻",
+                icono = "S",
                 serviciosIncluidos = listOf(
                     "Actualización de firmware",
                     "Instalación limpia del sistema",
@@ -97,7 +97,7 @@ data class CategoriaServicio(
                 id = 6,
                 nombre = "Controles y Accesorios",
                 descripcion = "Reparación de mandos DualShock y DualSense",
-                icono = "🎮",
+                icono = "C",
                 serviciosIncluidos = listOf(
                     "Reparación de drift en joysticks",
                     "Cambio de botones y gatillos",
@@ -111,7 +111,7 @@ data class CategoriaServicio(
                 id = 7,
                 nombre = "Conectividad y Puertos",
                 descripcion = "Reparación de puertos USB, HDMI y otros conectores",
-                icono = "🔌",
+                icono = "P",
                 serviciosIncluidos = listOf(
                     "Reparación puerto HDMI",
                     "Reparación puertos USB",
@@ -125,7 +125,7 @@ data class CategoriaServicio(
                 id = 8,
                 nombre = "Mantenimiento Preventivo",
                 descripcion = "Revisión periódica y mantenimiento programado",
-                icono = "⚙️",
+                icono = "M",
                 serviciosIncluidos = listOf(
                     "Mantenimiento semestral/anual",
                     "Revisión de componentes",
@@ -139,7 +139,7 @@ data class CategoriaServicio(
                 id = 9,
                 nombre = "Personalización",
                 descripcion = "Modificaciones estéticas y mejoras de rendimiento",
-                icono = "🎨",
+                icono = "E",
                 serviciosIncluidos = listOf(
                     "Cambio de carcasa",
                     "Instalación de LED personalizados",
@@ -153,7 +153,7 @@ data class CategoriaServicio(
                 id = 10,
                 nombre = "Servicios Premium",
                 descripcion = "Servicios express, domicilio y atención prioritaria",
-                icono = "⭐",
+                icono = "P+",
                 serviciosIncluidos = listOf(
                     "Servicio urgente/express",
                     "Recogida a domicilio",

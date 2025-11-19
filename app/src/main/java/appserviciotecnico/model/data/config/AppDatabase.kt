@@ -1,13 +1,15 @@
-package appserviciotecnico.model.data
+package appserviciotecnico.model.data.config
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import appserviciotecnico.model.entities.FormularioServicioEntity
-import appserviciotecnico.model.entities.SolicitudEntity
+import appserviciotecnico.model.data.dao.FormularioServicioDao
+import appserviciotecnico.model.data.dao.SolicitudDao
+import appserviciotecnico.model.data.entities.FormularioServicioEntity
+import appserviciotecnico.model.data.entities.SolicitudEntity
 
-// 🗄️ Base de datos Room para la aplicación
+// Base de datos Room para la aplicación
 @Database(
     entities = [
         FormularioServicioEntity::class,
@@ -18,8 +20,8 @@ import appserviciotecnico.model.entities.SolicitudEntity
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun formularioServicioDao(): FormularioServicioDao
-    abstract fun solicitudDao(): SolicitudDao
+        abstract fun formularioServicioDao(): FormularioServicioDao
+        abstract fun solicitudDao(): SolicitudDao
 
     companion object {
         @Volatile

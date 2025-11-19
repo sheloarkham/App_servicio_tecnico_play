@@ -1,8 +1,8 @@
-package appserviciotecnico.model.domain
+package appserviciotecnico.model.domain.models
 
 import java.util.*
 
-// 📋 Modelo de datos para representar una solicitud de servicio
+// Modelo de datos para representar una solicitud de servicio
 data class Solicitud(
     val id: Int,
     val servicio: String,
@@ -13,20 +13,20 @@ data class Solicitud(
     val horaAgendada: String
 )
 
-// 🎯 Estados posibles de una solicitud
+// Estados posibles de una solicitud
 @Suppress("unused")
 enum class EstadoSolicitud(
     val texto: String,
     val icono: String,
     val color: Long // Color en formato 0xFFRRGGBB
 ) {
-    PENDIENTE("Pendiente", "🟡", 0xFFFFA726),
-    EN_PROCESO("En Proceso", "🔵", 0xFF42A5F5),
-    COMPLETADO("Completado", "🟢", 0xFF66BB6A),
-    CANCELADO("Cancelado", "🔴", 0xFFEF5350)
+    PENDIENTE("Pendiente", "P", 0xFFFFA726),
+    EN_PROCESO("En Proceso", "E", 0xFF42A5F5),
+    COMPLETADO("Completado", "C", 0xFF66BB6A),
+    CANCELADO("Cancelado", "X", 0xFFEF5350)
 }
 
-// 🔧 Companion object con datos de ejemplo
+// Companion object con datos de ejemplo
 @Suppress("unused")
 object SolicitudesData {
 

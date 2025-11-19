@@ -1,10 +1,13 @@
-package appserviciotecnico.model.data
+package appserviciotecnico.model.data.dao
 
-import androidx.room.*
-import appserviciotecnico.model.entities.FormularioServicioEntity
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import appserviciotecnico.model.data.entities.FormularioServicioEntity
 import kotlinx.coroutines.flow.Flow
 
-// 📝 DAO para gestionar formularios de servicio técnico
+// DAO para gestionar formularios de servicio técnico
 @Dao
 interface FormularioServicioDao {
 

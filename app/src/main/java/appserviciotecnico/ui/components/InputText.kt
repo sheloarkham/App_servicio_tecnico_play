@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
-// 📝 Componente reutilizable para campos de texto con validación
+// Componente reutilizable para campos de texto con validación
 @Suppress("unused")
 @Composable
 fun InputText(

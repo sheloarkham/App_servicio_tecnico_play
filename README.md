@@ -1,12 +1,12 @@
-# 🎮 App Servicio Técnico PlayStation
+# App Servicio Técnico PlayStation
 
 Aplicación móvil para gestión de servicios técnicos de PlayStation 4 y PlayStation 5.
 
-## 👥 Equipo de Desarrollo
+## Equipo de Desarrollo
 - [Nombre Estudiante 1]
 - [Nombre Estudiante 2]
 
-## 📱 Descripción del Proyecto
+## Descripción del Proyecto
 
 Aplicación Android desarrollada en Kotlin con Jetpack Compose que permite a los usuarios:
 - Agendar servicios técnicos para consolas PS4 y PS5
@@ -14,66 +14,66 @@ Aplicación Android desarrollada en Kotlin con Jetpack Compose que permite a los
 - Gestionar solicitudes de servicio
 - Seguimiento del estado de las reparaciones
 
-## ✨ Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 ### HU01 - Pantalla de Inicio (Splash Screen)
-✅ Logo animado de la aplicación al iniciar  
-✅ Transición automática a pantalla de login  
-✅ Animación de fade-in/out
+- Logo animado de la aplicación al iniciar  
+- Transición automática a pantalla de login  
+- Animación de fade-in/out
 
 ### HU02 - Login con Validación
-✅ Formulario de inicio de sesión  
-✅ Validación de campos (correo y contraseña)  
-✅ Opción de ingresar como invitado  
-✅ Mensajes de error visuales  
-✅ Animaciones en formularios
+- Formulario de inicio de sesión  
+- Validación de campos (correo y contraseña)  
+- Opción de ingresar como invitado  
+- Mensajes de error visuales  
+- Animaciones en formularios
 
 ### HU03 - Formulario de Solicitud de Servicio
-✅ Campos para información del cliente  
-✅ Validación de formularios  
-✅ Selección de región  
-✅ Mensajes de confirmación
+- Campos para información del cliente  
+- Validación de formularios  
+- Selección de región  
+- Mensajes de confirmación
 
 ### HU04 - Catálogo de Servicios
-✅ Listado de categorías de servicios  
-✅ Cards con información detallada  
-✅ Navegación a agendamiento de servicios  
-✅ Animaciones de entrada escalonadas
+- Listado de categorías de servicios  
+- Cards con información detallada  
+- Navegación a agendamiento de servicios  
+- Animaciones de entrada escalonadas
 
 ### HU05 - Agendar Servicio Técnico
-✅ Selector de fecha (DatePicker)  
-✅ Selector de hora (TimePicker)  
-✅ Validación de horario laboral (L-S 10:00-18:00)  
-✅ Confirmación de cita  
-✅ Persistencia en base de datos local (Room)  
-✅ Botones con animaciones de pulsación
+- Selector de fecha (DatePicker)  
+- Selector de hora (TimePicker)  
+- Validación de horario laboral (L-S 10:00-18:00)  
+- Confirmación de cita  
+- Persistencia en base de datos local (Room)  
+- Botones con animaciones de pulsación
 
 ### HU06 - Visualizar Estado de Solicitudes
-✅ Lista de solicitudes guardadas  
-✅ Estados con colores distintivos (Pendiente, En Proceso, Completado)  
-✅ Detalles de cada solicitud  
-✅ Badges animados para estados
+- Lista de solicitudes guardadas  
+- Estados con colores distintivos (Pendiente, En Proceso, Completado)  
+- Detalles de cada solicitud  
+- Badges animados para estados
 
 ### HU07 - Persistencia Local con Room
-✅ Base de datos local con Room  
-✅ Repositorio para gestión de datos  
-✅ DAOs para operaciones CRUD  
-✅ Integración con ViewModels  
-✅ Arquitectura MVVM
+- Base de datos local con Room  
+- Repositorio para gestión de datos  
+- DAOs para operaciones CRUD  
+- Integración con ViewModels  
+- Arquitectura MVVM
 
-### HU08 - Animaciones Funcionales ⭐ NUEVO
-✅ Animaciones de transición entre pantallas (slide, fade)  
-✅ Botones interactivos con efecto de pulsación y escala  
-✅ TextFields con animación de shake en errores  
-✅ Mensajes animados de éxito/error  
-✅ Cards con animación de entrada deslizante  
-✅ Loading indicators animados  
-✅ Badges con efecto de pulsación  
-✅ Animaciones en diálogos y modales  
-✅ Transiciones suaves en LazyColumns  
-✅ Efectos visuales en navegación drawer
+### HU08 - Animaciones Funcionales NUEVO
+- Animaciones de transición entre pantallas (slide, fade)  
+- Botones interactivos con efecto de pulsación y escala  
+- TextFields con animación de shake en errores  
+- Mensajes animados de éxito/error  
+- Cards con animación de entrada deslizante  
+- Loading indicators animados  
+- Badges con efecto de pulsación  
+- Animaciones en diálogos y modales  
+- Transiciones suaves en LazyColumns  
+- Efectos visuales en navegación drawer
 
-## 🎨 Animaciones Implementadas
+## Animaciones Implementadas
 
 ### Transiciones entre Pantallas
 - **Fade In/Out**: Para splash screen y pantallas principales

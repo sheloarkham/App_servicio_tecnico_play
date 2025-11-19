@@ -1,10 +1,10 @@
 package appserviciotecnico.model.domain.usecases
 
-import appserviciotecnico.model.entities.SolicitudEntity
-import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.model.data.entities.SolicitudEntity
+import appserviciotecnico.model.data.repository.SolicitudRepository
 
 /**
- * 📋 Caso de uso: Guardar solicitud de servicio
+ * Caso de uso: Guardar solicitud de servicio
  * Encapsula la lógica de negocio para crear una solicitud
  */
 class GuardarSolicitudUseCase(

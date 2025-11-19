@@ -3,8 +3,8 @@ package appserviciotecnico.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.data.AppDatabase
-import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.model.data.config.AppDatabase
+import appserviciotecnico.model.data.repository.SolicitudRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

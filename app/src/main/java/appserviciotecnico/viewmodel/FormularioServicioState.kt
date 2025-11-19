@@ -1,8 +1,8 @@
 package appserviciotecnico.viewmodel
 
-import appserviciotecnico.model.domain.FormularioServicioErrores
+import appserviciotecnico.model.domain.validators.FormularioServicioErrores
 
-// 🎯 Estado del formulario de servicio
+// Estado del formulario de servicio
 data class FormularioServicioState(
     // Datos del cliente
     val nombreCliente: String = "",

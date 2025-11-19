@@ -1,9 +1,9 @@
-package appserviciotecnico.model.entities
+package appserviciotecnico.model.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// 📅 Entidad para almacenar solicitudes/citas de servicio técnico
+// Entidad para almacenar solicitudes/citas de servicio técnico
 @Entity(tableName = "solicitud_cita")
 data class SolicitudEntity(
     @PrimaryKey(autoGenerate = true)

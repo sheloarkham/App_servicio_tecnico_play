@@ -1,6 +1,6 @@
-package appserviciotecnico.model.domain
+package appserviciotecnico.model.domain.validators
 
-// ⚠️ Clase para manejar errores del formulario de servicio
+// Clase para manejar errores del formulario de servicio
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 data class FormularioServicioErrores(
     val nombreCliente: String? = null,
@@ -33,4 +33,3 @@ data class FormularioServicioErrores(
             ?: tipoServicio
     }
 }
-

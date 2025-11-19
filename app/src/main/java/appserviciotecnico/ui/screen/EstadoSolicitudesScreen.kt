@@ -16,8 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
-import appserviciotecnico.model.domain.EstadoSolicitud
-import appserviciotecnico.model.domain.Solicitud
+import appserviciotecnico.model.domain.models.EstadoSolicitud
+import appserviciotecnico.model.domain.models.Solicitud
 import appserviciotecnico.ui.components.SolicitudCard
 import appserviciotecnico.utils.NativeResourcesHelper
 import appserviciotecnico.viewmodel.EstadoSolicitudesViewModel
@@ -308,7 +308,7 @@ fun DetallesSolicitudDialog(
 
     // Crear texto para compartir/email
     val textoCompartir = """
-        📋 Solicitud de Servicio Técnico PlayStation
+        Solicitud de Servicio Técnico PlayStation
         
         ID: #${solicitud.id.toString().padStart(4, '0')}
         Servicio: ${solicitud.servicio}

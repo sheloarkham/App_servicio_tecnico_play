@@ -1,11 +1,11 @@
 package appserviciotecnico.model.domain.usecases
 
-import appserviciotecnico.model.entities.SolicitudEntity
-import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.model.data.entities.SolicitudEntity
+import appserviciotecnico.model.data.repository.SolicitudRepository
 import kotlinx.coroutines.flow.Flow
 
 /**
- * 📊 Caso de uso: Obtener lista de solicitudes
+ * Caso de uso: Obtener lista de solicitudes
  * Encapsula la lógica para recuperar solicitudes del usuario
  */
 class ObtenerSolicitudesUseCase(

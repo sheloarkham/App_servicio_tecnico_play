@@ -1,6 +1,6 @@
-package appserviciotecnico.model.domain
+package appserviciotecnico.model.domain.ui_states
 
-// 🎯 Estados de UI para el formulario de servicio
+// Estados de UI para el formulario de servicio
 @Suppress("unused")
 sealed class FormularioServicioUIState {
     // Estado inicial/inactivo
@@ -18,4 +18,3 @@ sealed class FormularioServicioUIState {
     // Validación de campos
     data class ValidationError(val errors: Map<String, String>) : FormularioServicioUIState()
 }
-

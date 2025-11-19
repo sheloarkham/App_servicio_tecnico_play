@@ -12,15 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import appserviciotecnico.model.data.AppDatabase
-import appserviciotecnico.model.entities.SolicitudEntity
-import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.model.data.config.AppDatabase
+import appserviciotecnico.model.data.entities.SolicitudEntity
+import appserviciotecnico.model.data.repository.SolicitudRepository
 import appserviciotecnico.utils.NativeResourcesHelper
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-// 📅 Pantalla para agendar servicio técnico
+// Pantalla para agendar servicio técnico
 @Suppress("unused")
 @Composable
 fun AgendarServicioScreen(
@@ -92,9 +92,6 @@ fun AgendarServicioScreen(
     if (mostrarConfirmacion) {
         AlertDialog(
             onDismissRequest = { mostrarConfirmacion = false },
-            icon = {
-                Text("✅", style = MaterialTheme.typography.displayMedium)
-            },
             title = {
                 Text(
                     "Cita Confirmada",
@@ -109,16 +106,16 @@ fun AgendarServicioScreen(
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
 
-                    Text("📦 Servicio:", fontWeight = FontWeight.Bold)
+                    Text("Servicio:", fontWeight = FontWeight.Bold)
                     Text(categoriaNombre, modifier = Modifier.padding(bottom = 8.dp))
 
-                    Text("📅 Fecha:", fontWeight = FontWeight.Bold)
+                    Text("Fecha:", fontWeight = FontWeight.Bold)
                     Text(
                         fechaSeleccionada?.let { dateFormatter.format(it) } ?: "",
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
 
-                    Text("⏰ Hora:", fontWeight = FontWeight.Bold)
+                    Text("Hora:", fontWeight = FontWeight.Bold)
                     horaSeleccionada?.let { (hour, minute) ->
                         Text(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
                     }
@@ -159,7 +156,7 @@ fun AgendarServicioScreen(
                             }
                         }
                     ) {
-                        Text("📅 Agregar al Calendario")
+                        Text("Agregar al Calendario")
                     }
 
                     Button(onClick = {
@@ -250,7 +247,7 @@ fun AgendarServicioScreen(
                         val fecha = dateFormatter.format(it).replaceFirstChar { char ->
                             if (char.isLowerCase()) char.titlecase(Locale.forLanguageTag("es-ES")) else char.toString()
                         }
-                        "📅 $fecha"
+                        "Fecha: $fecha"
                     } ?: "Seleccionar fecha",
                     modifier = Modifier.padding(8.dp)
                 )
@@ -281,7 +278,7 @@ fun AgendarServicioScreen(
             ) {
                 Text(
                     text = horaSeleccionada?.let { (hour, minute) ->
-                        "⏰ ${String.format(Locale.getDefault(), "%02d:%02d", hour, minute)}"
+                        "Hora: ${String.format(Locale.getDefault(), "%02d:%02d", hour, minute)}"
                     } ?: "Seleccionar hora",
                     modifier = Modifier.padding(8.dp)
                 )

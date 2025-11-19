@@ -2,10 +2,10 @@ package appserviciotecnico.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.domain.Solicitud
-import appserviciotecnico.model.domain.EstadoSolicitud
-import appserviciotecnico.model.entities.SolicitudEntity
-import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.model.domain.models.Solicitud
+import appserviciotecnico.model.domain.models.EstadoSolicitud
+import appserviciotecnico.model.data.entities.SolicitudEntity
+import appserviciotecnico.model.data.repository.SolicitudRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.*
 
-// 🎮 ViewModel para gestionar estado de solicitudes
+// ViewModel para gestionar estado de solicitudes
 class EstadoSolicitudesViewModel(
     private val repository: SolicitudRepository
 ) : ViewModel() {

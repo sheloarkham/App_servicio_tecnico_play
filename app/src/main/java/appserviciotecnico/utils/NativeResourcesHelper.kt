@@ -12,12 +12,12 @@ import android.provider.MediaStore
 import android.widget.Toast
 
 /**
- * 📱 Utilidades para acceder a recursos nativos del dispositivo
+ * Utilidades para acceder a recursos nativos del dispositivo
  */
 object NativeResourcesHelper {
 
     /**
-     * 📞 Abrir el marcador de teléfono con un número específico
+     * Abrir el marcador de teléfono con un número específico
      */
     fun llamarSoporteTecnico(context: Context, numeroTelefono: String = "+56912345678") {
         try {
@@ -31,7 +31,7 @@ object NativeResourcesHelper {
     }
 
     /**
-     * 📅 Agregar evento al calendario del dispositivo
+     * Agregar evento al calendario del dispositivo
      */
     fun agregarCitaAlCalendario(
         context: Context,
@@ -51,7 +51,7 @@ object NativeResourcesHelper {
                 putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
             }
             context.startActivity(intent)
-            Toast.makeText(context, "✅ Abriendo calendario...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, " Abriendo calendario...", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             Toast.makeText(context, "Error al abrir calendario: ${e.message}", Toast.LENGTH_SHORT).show()
         }

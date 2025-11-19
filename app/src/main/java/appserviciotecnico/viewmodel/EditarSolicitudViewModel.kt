@@ -2,9 +2,9 @@ package appserviciotecnico.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.domain.Solicitud
-import appserviciotecnico.model.entities.SolicitudEntity
-import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.model.domain.models.Solicitud
+import appserviciotecnico.model.data.entities.SolicitudEntity
+import appserviciotecnico.model.data.repository.SolicitudRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -18,7 +18,7 @@ import appserviciotecnico.utils.NativeResourcesHelper
 import appserviciotecnico.viewmodel.FormularioServicioViewModel
 import appserviciotecnico.viewmodel.FormularioServicioViewModelFactory
 
-// 📋 Pantalla de formulario de servicio técnico PlayStation
+// Pantalla de formulario de servicio técnico PlayStation
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormularioServicioScreen() {
@@ -59,7 +59,7 @@ fun FormularioServicioScreen() {
                 .padding(bottom = 16.dp), // Padding extra al final
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-        // 🎮 Título
+        // Título
         Text(
             text = "Solicitar Cotización",
             style = MaterialTheme.typography.titleLarge.copy(
@@ -76,7 +76,7 @@ fun FormularioServicioScreen() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // 👤 Datos del cliente
+        // Datos del cliente
         Text(
             text = "Datos del cliente",
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
@@ -105,7 +105,7 @@ fun FormularioServicioScreen() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // 🎮 Datos de la consola
+        // Datos de la consola
         Text(
             text = "Datos de la consola",
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
@@ -203,7 +203,7 @@ fun FormularioServicioScreen() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // 🔧 Descripción del problema
+        // Descripción del problema
         Text(
             text = "Descripción de la falla",
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
@@ -217,7 +217,7 @@ fun FormularioServicioScreen() {
             maxLines = 5
         )
 
-        // 📷 Botón para adjuntar foto
+        // Botón para adjuntar foto
         OutlinedButton(
             onClick = {
                 NativeResourcesHelper.vibrar(context)
@@ -225,12 +225,12 @@ fun FormularioServicioScreen() {
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("📷 Adjuntar Foto de la Consola")
+            Text("Adjuntar Foto de la Consola")
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // ✅ Mensaje de éxito con animación
+        // Mensaje de éxito con animación
         AnimatedVisibility(
             visible = estado.mensajeExito != null,
             enter = slideInVertically(
@@ -265,7 +265,7 @@ fun FormularioServicioScreen() {
             }
         }
 
-        // 🔘 Botón enviar
+        // Botón enviar
         Button(
             onClick = {
                 viewModel.onEnviarFormulario()

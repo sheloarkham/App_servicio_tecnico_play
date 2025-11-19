@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// 📊 Tarjeta de resumen de estadísticas
+// Tarjeta de resumen de estadísticas
 @Composable
 fun SummaryCard(
     title: String,

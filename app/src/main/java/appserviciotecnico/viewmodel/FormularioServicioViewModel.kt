@@ -2,16 +2,19 @@ package appserviciotecnico.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import appserviciotecnico.model.domain.FormularioServicioErrores
-import appserviciotecnico.model.entities.FormularioServicioEntity
-import appserviciotecnico.model.repository.FormularioServicioRepository
+import appserviciotecnico.model.domain.validators.FormularioServicioErrores
+import appserviciotecnico.model.data.entities.FormularioServicioEntity
+import appserviciotecnico.model.data.repository.FormularioServicioRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-// 🎮 ViewModel para gestionar el formulario de servicio técnico PlayStation
+// ViewModel para gestionar el formulario de servicio técnico PlayStation
 class FormularioServicioViewModel(
     private val repository: FormularioServicioRepository
 ) : ViewModel() {
@@ -74,7 +77,7 @@ class FormularioServicioViewModel(
         }
     }
 
-    // ✅ Validar y enviar formulario
+    //  Validar y enviar formulario
     fun onEnviarFormulario() {
         val estadoActual = _estado.value
         val errores = validarFormulario(estadoActual)
@@ -102,7 +105,9 @@ class FormularioServicioViewModel(
                     modeloConsola = estadoActual.modeloConsola,
                     descripcionProblema = estadoActual.descripcionProblema,
                     estadoSolicitud = "Pendiente",  // Estado inicial
-                    fechaSolicitud = java.text.SimpleDateFormat("dd 'de' MMMM 'de' yyyy HH:mm", java.util.Locale.forLanguageTag("es-ES")).format(java.util.Date())
+                    fechaSolicitud = SimpleDateFormat("dd 'de' MMMM 'de' yyyy HH:mm", Locale.forLanguageTag("es-ES")).format(
+                        Date()
+                    )
                 )
 
                 repository.guardarFormulario(entity)

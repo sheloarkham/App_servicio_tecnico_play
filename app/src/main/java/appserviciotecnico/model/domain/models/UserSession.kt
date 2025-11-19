@@ -1,4 +1,4 @@
-package appserviciotecnico.model.domain
+package appserviciotecnico.model.domain.models
 
 // Modelo para representar el estado de autenticación del usuario
 @Suppress("unused")
@@ -31,4 +31,3 @@ data class UserSession(
         )
     }
 }
-

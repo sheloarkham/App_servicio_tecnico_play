@@ -1,9 +1,9 @@
-package appserviciotecnico.model.entities
+package appserviciotecnico.model.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// 📋 Entidad para almacenar formularios de servicio técnico de PlayStation
+// Entidad para almacenar formularios de servicio técnico de PlayStation
 @Entity(tableName = "formulario_servicio")
 data class FormularioServicioEntity(
     @PrimaryKey(autoGenerate = true)

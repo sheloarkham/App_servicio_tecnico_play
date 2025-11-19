@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import appserviciotecnico.model.domain.Solicitud
+import appserviciotecnico.model.domain.models.Solicitud
 import appserviciotecnico.viewmodel.EditarSolicitudViewModel
 import appserviciotecnico.viewmodel.EditarSolicitudViewModelFactory
 import java.text.SimpleDateFormat
@@ -113,7 +113,7 @@ fun EditarSolicitudScreen(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "📅 Fecha de Cita",
+                    text = "Fecha de Cita",
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -146,7 +146,7 @@ fun EditarSolicitudScreen(
                     { _, hourOfDay, minute ->
                         // Validar horario: Lunes a Sábado 10:00 - 18:00
                         if (hourOfDay < 10 || hourOfDay >= 18) {
-                            viewModel.setErrorHora("⏰ Horario de atención: 10:00 - 18:00")
+                            viewModel.setErrorHora("Horario de atención: 10:00 - 18:00")
                         } else {
                             val horaFormateada = String.format("%02d:%02d", hourOfDay, minute)
                             viewModel.setHora(horaFormateada)
@@ -165,7 +165,7 @@ fun EditarSolicitudScreen(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "⏰ Hora de Cita",
+                    text = "Hora de Cita",
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.primary
                 )

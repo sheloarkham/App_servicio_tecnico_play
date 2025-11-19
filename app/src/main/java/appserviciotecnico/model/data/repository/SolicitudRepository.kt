@@ -1,9 +1,9 @@
-package appserviciotecnico.model.repository
+package appserviciotecnico.model.data.repository
 
-import appserviciotecnico.model.data.SolicitudDao
-import appserviciotecnico.model.entities.SolicitudEntity
+import appserviciotecnico.model.data.dao.SolicitudDao
+import appserviciotecnico.model.data.entities.SolicitudEntity
 
-// 📦 Repositorio para gestionar solicitudes/citas de servicio
+// Repositorio para gestionar solicitudes/citas de servicio
 class SolicitudRepository(
     private val dao: SolicitudDao
 ) {

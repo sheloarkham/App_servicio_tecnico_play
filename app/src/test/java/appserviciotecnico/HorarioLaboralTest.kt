@@ -1,6 +1,6 @@
 package appserviciotecnico
 
-import appserviciotecnico.model.domain.ValidadorHorario
+import appserviciotecnico.model.domain.validators.ValidadorHorario
 import org.junit.Assert.*
 import org.junit.Test
 import java.util.Calendar

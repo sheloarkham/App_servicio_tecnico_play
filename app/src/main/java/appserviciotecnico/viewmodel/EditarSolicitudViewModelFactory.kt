@@ -3,9 +3,9 @@ package appserviciotecnico.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import appserviciotecnico.model.domain.Solicitud
-import appserviciotecnico.model.data.AppDatabase
-import appserviciotecnico.model.repository.SolicitudRepository
+import appserviciotecnico.model.domain.models.Solicitud
+import appserviciotecnico.model.data.config.AppDatabase
+import appserviciotecnico.model.data.repository.SolicitudRepository
 
 // 🏭 Factory para crear EditarSolicitudViewModel
 class EditarSolicitudViewModelFactory(

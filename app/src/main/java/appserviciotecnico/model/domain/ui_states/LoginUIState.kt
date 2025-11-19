@@ -1,6 +1,8 @@
-package appserviciotecnico.model.domain
+package appserviciotecnico.model.domain.ui_states
 
-// 🔐 Estados de UI para el login
+import appserviciotecnico.model.domain.models.UserSession
+
+// Estados de UI para el login
 @Suppress("unused")
 sealed class LoginUIState {
     // Estado inicial
@@ -21,4 +23,3 @@ sealed class LoginUIState {
     // Usuario ingresó como invitado
     data object GuestMode : LoginUIState()
 }
-

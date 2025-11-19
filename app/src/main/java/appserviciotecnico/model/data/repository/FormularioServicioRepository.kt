@@ -1,9 +1,9 @@
-package appserviciotecnico.model.repository
+package appserviciotecnico.model.data.repository
 
-import appserviciotecnico.model.data.FormularioServicioDao
-import appserviciotecnico.model.entities.FormularioServicioEntity
+import appserviciotecnico.model.data.dao.FormularioServicioDao
+import appserviciotecnico.model.data.entities.FormularioServicioEntity
 
-// 📦 Repositorio para gestionar formularios de servicio técnico
+// Repositorio para gestionar formularios de servicio técnico
 class FormularioServicioRepository(
     private val dao: FormularioServicioDao
 ) {

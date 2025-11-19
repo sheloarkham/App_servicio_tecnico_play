@@ -40,7 +40,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // 📝 Título
+        // Título
         Text(
             text = "Iniciar Sesión",
             style = MaterialTheme.typography.headlineMedium,
@@ -48,7 +48,7 @@ fun LoginScreen(
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
-        // 📧 Campo de correo electrónico
+        // Campo de correo electrónico
         OutlinedTextField(
             value = email,
             onValueChange = {
@@ -72,7 +72,7 @@ fun LoginScreen(
             )
         )
 
-        // 🔒 Campo de contraseña
+        // Campo de contraseña
         OutlinedTextField(
             value = password,
             onValueChange = {
@@ -97,7 +97,7 @@ fun LoginScreen(
             )
         )
 
-        // ⚠️ Mensaje de error
+        // Mensaje de error
         if (errorMessage.isNotEmpty()) {
             Text(
                 text = errorMessage,
@@ -107,7 +107,7 @@ fun LoginScreen(
             )
         }
 
-        // 🔘 Botón Ingresar
+        // Botón Ingresar
         Button(
             onClick = {
                 // Validación de campos vacíos
@@ -141,8 +141,8 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // 👤 Botón Ingresar como invitado
-        OutlinedButton(
+        // Botón Ingresar como invitado
+        TextButton(
             onClick = {
                 // Ingresar sin autenticación
                 onLoginSuccess()

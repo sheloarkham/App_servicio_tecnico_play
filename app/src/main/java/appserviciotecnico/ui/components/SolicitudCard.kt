@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import appserviciotecnico.model.domain.EstadoSolicitud
-import appserviciotecnico.model.domain.Solicitud
+import appserviciotecnico.model.domain.models.EstadoSolicitud
+import appserviciotecnico.model.domain.models.Solicitud
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -100,8 +100,9 @@ fun SolicitudCard(
                 // Fecha
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "📅",
-                        style = MaterialTheme.typography.bodyMedium
+                        text = "Fecha:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
@@ -116,8 +117,9 @@ fun SolicitudCard(
                 // Hora
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "⏰",
-                        style = MaterialTheme.typography.bodyMedium
+                        text = "Hora:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(

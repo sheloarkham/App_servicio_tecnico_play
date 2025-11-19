@@ -1,13 +1,13 @@
 package appserviciotecnico
 
-import appserviciotecnico.model.domain.EstadoSolicitud
-import appserviciotecnico.model.domain.Solicitud
+import appserviciotecnico.model.domain.models.EstadoSolicitud
+import appserviciotecnico.model.domain.models.Solicitud
 import org.junit.Assert.*
 import org.junit.Test
 import java.util.*
 
 /**
- * 📋 Tests unitarios para estados de solicitudes
+ * Tests unitarios para estados de solicitudes
  */
 class EstadoSolicitudTest {
 

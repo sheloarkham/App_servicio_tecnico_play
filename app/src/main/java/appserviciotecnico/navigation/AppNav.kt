@@ -20,7 +20,7 @@ import appserviciotecnico.ui.screen.StartScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-// 🧭 Composable principal que controla la navegación
+//  Composable principal que controla la navegación
 @Composable
 fun AppNav() {
     val nav = rememberNavController()

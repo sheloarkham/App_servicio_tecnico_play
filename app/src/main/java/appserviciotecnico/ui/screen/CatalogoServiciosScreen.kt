@@ -8,7 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import appserviciotecnico.model.domain.CategoriaServicio
+import appserviciotecnico.model.domain.models.CategoriaServicio
 import appserviciotecnico.ui.components.CategoriaCard
 
 //  Pantalla de catálogo de servicios con categorías

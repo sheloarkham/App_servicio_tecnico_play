@@ -1,4 +1,4 @@
-package appserviciotecnico.model.domain
+package appserviciotecnico.model.domain.validators
 
 import java.util.Calendar
 
@@ -68,4 +68,3 @@ object ValidadorHorario {
         return "Lunes a Sábado: $HORA_APERTURA:00 - $HORA_CIERRE:00"
     }
 }
-

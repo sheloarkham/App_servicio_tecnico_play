@@ -1,8 +1,7 @@
-package appserviciotecnico.model.domain
-
+package appserviciotecnico.model.domain.validators
 
 /**
- * 🔍 Validador de formularios de servicio técnico
+ * Validador de formularios de servicio técnico
  * Centraliza toda la lógica de validación
  */
 object ValidadorFormulario {
@@ -91,4 +90,3 @@ object ValidadorFormulario {
         )
     }
 }
-
