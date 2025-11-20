@@ -4,49 +4,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import appserviciotecnico.model.data.entities.SolicitudEntity
 import appserviciotecnico.model.data.repository.SolicitudRepository
-import appserviciotecnico.model.domain.models.EstadoSolicitud
 import appserviciotecnico.model.domain.models.Solicitud
+import appserviciotecnico.model.domain.usecases.ObtenerSolicitudesUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import java.util.Date
 
 // ViewModel para gestionar estado de solicitudes
 class EstadoSolicitudesViewModel(
-    private val repository: SolicitudRepository
+    private val obtenerSolicitudesUseCase: ObtenerSolicitudesUseCase,
+    private val repository: SolicitudRepository  // Solo para eliminar
 ) : ViewModel() {
 
-    // Flow que convierte SolicitudEntity a Solicitud para la UI
-    val solicitudes: StateFlow<List<Solicitud>> = repository.obtenerSolicitudes()
-        .map { entities ->
-            entities.mapNotNull { entity ->
-                try {
-                    Solicitud(
-                        id = entity.id.toInt(),
-                        servicio = entity.servicio,
-                        fechaAgendada = Date(entity.fechaAgendada),
-                        estado = when (entity.estado) {
-                            "Pendiente" -> EstadoSolicitud.PENDIENTE
-                            "En Proceso" -> EstadoSolicitud.EN_PROCESO
-                            "Completado" -> EstadoSolicitud.COMPLETADO
-                            "Cancelado" -> EstadoSolicitud.CANCELADO
-                            else -> EstadoSolicitud.PENDIENTE
-                        },
-                        clienteNombre = entity.clienteNombre,
-                        descripcion = entity.descripcion,
-                        horaAgendada = entity.horaAgendada
-                    )
-                } catch (_: Exception) {
-                    // Si hay error mapeando alguna entidad, la ignoramos
-                    null
-                }
-            }
-        }
+    // Flow que obtiene las solicitudes usando el UseCase
+    val solicitudes: StateFlow<List<Solicitud>> = obtenerSolicitudesUseCase.invoke()
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.Companion.WhileSubscribed(5000),
+            started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
 
