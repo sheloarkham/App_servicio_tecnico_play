@@ -1,4 +1,4 @@
-package appserviciotecnico.model.domain.ui_states
+package appserviciotecnico.ui.ui_states
 
 // Estados de UI para el formulario de servicio
 @Suppress("unused")

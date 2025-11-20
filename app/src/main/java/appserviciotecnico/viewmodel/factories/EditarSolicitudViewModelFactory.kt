@@ -8,7 +8,7 @@ import appserviciotecnico.model.data.repository.SolicitudRepository
 import appserviciotecnico.model.domain.models.Solicitud
 import appserviciotecnico.viewmodel.viewmodels.EditarSolicitudViewModel
 
-// 🏭 Factory para crear EditarSolicitudViewModel
+//  Factory para crear EditarSolicitudViewModel
 class EditarSolicitudViewModelFactory(
     private val application: Application,
     private val solicitud: Solicitud
