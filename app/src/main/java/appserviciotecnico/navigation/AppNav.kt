@@ -131,6 +131,18 @@ fun AppNav() {
                 EstadoSolicitudesScreen()
             }
         }
+
+        // GESTIÓN DE SOLICITUDES CON BACKEND (con drawer)
+        composable(Routes.SolicitudBackend) {
+            DrawerScaffold(
+                currentRoute = Routes.SolicitudBackend,
+                onNavigate = { nav.navigate(it) },
+                drawerState = drawerState,
+                scope = scope
+            ) {
+                appserviciotecnico.ui.screen.SolicitudBackendScreen()
+            }
+        }
     }
 }
 
@@ -147,7 +159,8 @@ private fun DrawerScaffold(
         DrawerItem("Inicio", Routes.Home),
         DrawerItem("Catálogo de Servicios", Routes.Catalogo),
         DrawerItem("Solicitar Cotización", Routes.Form),
-        DrawerItem("Mis Solicitudes", Routes.Estado)
+        DrawerItem("Mis Solicitudes", Routes.Estado),
+        DrawerItem("Gestión Backend", Routes.SolicitudBackend)
     )
 
     ModalNavigationDrawer(
@@ -203,6 +216,7 @@ private fun appBarTitle(route: String?): String = when (route) {
     Routes.Form -> "Solicitar Cotización"
     Routes.Agendar -> "Agendar Servicio"
     Routes.Estado -> "Mis Solicitudes"
+    Routes.SolicitudBackend -> "Gestión Backend"
     else -> ""
 }
 
