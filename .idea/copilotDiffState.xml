@@ -27,14 +27,6 @@
             </PendingDiffInfo>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/appserviciotecnico/network/models/CotizacionDTO.kt">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/app/src/main/java/appserviciotecnico/network/models/CotizacionDTO.kt" />
-              <option name="updatedContent" value="package appserviciotecnico.network.models&#10;&#10;import com.google.gson.annotations.SerializedName&#10;&#10;/**&#10; * DTO: Cotización de servicio técnico del backend&#10; */&#10;data class CotizacionDTO(&#10;    @SerializedName(&quot;id&quot;)&#10;    val id: Long? = null,&#10;&#10;    @SerializedName(&quot;nombreCliente&quot;)&#10;    val nombreCliente: String,&#10;&#10;    @SerializedName(&quot;correoCliente&quot;)&#10;    val correoCliente: String,&#10;&#10;    @SerializedName(&quot;telefonoCliente&quot;)&#10;    val telefonoCliente: String,&#10;&#10;    @SerializedName(&quot;tipoConsola&quot;)&#10;    val tipoConsola: String,&#10;&#10;    @SerializedName(&quot;modeloConsola&quot;)&#10;    val modeloConsola: String,&#10;&#10;    @SerializedName(&quot;descripcionProblema&quot;)&#10;    val descripcionProblema: String,&#10;&#10;    @SerializedName(&quot;estadoSolicitud&quot;)&#10;    val estadoSolicitud: String = &quot;PENDIENTE&quot;,&#10;&#10;    @SerializedName(&quot;fechaSolicitud&quot;)&#10;    val fechaSolicitud: String,&#10;&#10;    @SerializedName(&quot;motivoEdicion&quot;)&#10;    val motivoEdicion: String? = null,&#10;&#10;    @SerializedName(&quot;fechaReagendada&quot;)&#10;    val fechaReagendada: String? = null,&#10;&#10;    @SerializedName(&quot;fechaCreacion&quot;)&#10;    val fechaCreacion: String? = null&#10;)&#10;" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/appserviciotecnico/network/models/SolicitudDTO.kt">
           <value>
             <PendingDiffInfo>
