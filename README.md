@@ -1027,19 +1027,16 @@ Este proyecto es con fines educativos para el curso de Desarrollo de Aplicacione
 
 ### Desarrolladores
 
-**Axel Shelo Arkham**
+**Luis Rosales**
 - GitHub: [@sheloarkham](https://github.com/sheloarkham)
 - Email: [tu-email@example.com]
 
-**[Nombre Integrante 2]**
-- GitHub: [@usuario2](https://github.com/usuario2)
-- Email: [email2@example.com]
 
 ### Repositorios
 
 - **App Móvil:** [https://github.com/sheloarkham/App_servicio_tecnico_play](https://github.com/sheloarkham/App_servicio_tecnico_play)
 - **Backend:** [https://github.com/sheloarkham/backend-servicio-tecnico](https://github.com/sheloarkham/backend-servicio-tecnico)
-- **Trello:** [https://trello.com/b/XXXXXXXX/app-servicio-tecnico](https://trello.com/b/XXXXXXXX/app-servicio-tecnico)
+- **Trello:** [https://trello.com/b/XXXXXXXX/app-servicio-tecnico](https://trello.com/b/X6Wb6Zgp/mi-tablero-de-trello)
 
 ---
 
