@@ -27,12 +27,11 @@ Sistema completo de gestión de servicios técnicos para consolas PlayStation 4 
 
 | Nombre | Rol | GitHub | Email |
 |--------|-----|--------|-------|
-| **Axel Shelo Arkham** | Desarrollador Full Stack | [@sheloarkham](https://github.com/sheloarkham) | [tu-email@example.com] |
-| **[Nombre Integrante 2]** | Desarrollador Backend/Frontend | [@usuario2](https://github.com/usuario2) | [email2@example.com] |
+| **Luis Rosales** | Desarrollador Full Stack | [@sheloarkham](https://github.com/sheloarkham) | [lu.rosalesp@duocuc.cl] |
 
-**Institución:** [Tu Universidad/Instituto]  
+**Institución:** [DUOC]  
 **Curso:** Desarrollo de Aplicaciones Móviles  
-**Profesor:** [Nombre del Profesor]  
+**Profesor:** Juan Azocar 
 **Fecha de Entrega:** Diciembre 2025
 
 ---
@@ -1029,7 +1028,7 @@ Este proyecto es con fines educativos para el curso de Desarrollo de Aplicacione
 
 **Luis Rosales**
 - GitHub: [@sheloarkham](https://github.com/sheloarkham)
-- Email: [tu-email@example.com]
+
 
 
 ### Repositorios
@@ -1042,7 +1041,7 @@ Este proyecto es con fines educativos para el curso de Desarrollo de Aplicacione
 
 ## 🙏 Agradecimientos
 
-- **Profesor:** [Nombre del Profesor]
+- **Profesor:** [Juan Azocar]
 - **Institución:** [Tu Universidad/Instituto]
 - **Recursos:**
   - [Android Developers](https://developer.android.com/)
