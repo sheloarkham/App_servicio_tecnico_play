@@ -66,6 +66,9 @@ dependencies {
     // Coroutines para operaciones asíncronas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+    // Coil para cargar imágenes desde URLs (API externa)
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
     // Testing - Unit Tests (JUnit básico)
     testImplementation(libs.junit)
 

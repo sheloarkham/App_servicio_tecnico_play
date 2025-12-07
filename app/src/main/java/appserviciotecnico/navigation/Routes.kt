@@ -10,6 +10,7 @@ object Routes {
     const val Agendar = "agendar"    // Agendar servicio técnico
     const val Estado = "estado"      // Estado de solicitudes
     const val SolicitudBackend = "solicitud_backend"  // Gestión de solicitudes con backend
+    const val ExternalInfo = "external_info"  // Información de API externa (Videojuegos)
 
     // Función helper para crear ruta con argumentos
     fun agendarConCategoria(categoriaId: Int, categoriaNombre: String): String {

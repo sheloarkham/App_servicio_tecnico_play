@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import appserviciotecnico.ui.screen.AgendarServicioScreen
 import appserviciotecnico.ui.screen.CatalogoServiciosScreen
 import appserviciotecnico.ui.screen.EstadoSolicitudesScreen
+import appserviciotecnico.ui.screen.ExternalInfoScreen
 import appserviciotecnico.ui.screen.FormularioServicioScreen
 import appserviciotecnico.ui.screen.HomeScreen
 import appserviciotecnico.ui.screen.LoginScreen
@@ -63,7 +64,8 @@ fun AppNav() {
                     onNavigateToCatalog = { nav.navigate(Routes.Catalogo) },
                     onNavigateToAgendar = { nav.navigate(Routes.Agendar) },
                     onNavigateToSolicitudes = { nav.navigate(Routes.Estado) },
-                    onNavigateToFormulario = { nav.navigate(Routes.Form) }
+                    onNavigateToFormulario = { nav.navigate(Routes.Form) },
+                    onNavigateToExternalInfo = { nav.navigate(Routes.ExternalInfo) }
                 )
             }
         }
@@ -143,6 +145,11 @@ fun AppNav() {
                 appserviciotecnico.ui.screen.SolicitudBackendScreen()
             }
         }
+
+        // INFORMACIÓN DE API EXTERNA (Videojuegos)
+        composable(Routes.ExternalInfo) {
+            ExternalInfoScreen(navController = nav)
+        }
     }
 }
 
@@ -160,7 +167,8 @@ private fun DrawerScaffold(
         DrawerItem("Catálogo de Servicios", Routes.Catalogo),
         DrawerItem("Solicitar Cotización", Routes.Form),
         DrawerItem("Mis Solicitudes", Routes.Estado),
-        DrawerItem("Gestión Backend", Routes.SolicitudBackend)
+        DrawerItem("Gestión Backend", Routes.SolicitudBackend),
+        DrawerItem("🎮 Videojuegos (API Externa)", Routes.ExternalInfo)
     )
 
     ModalNavigationDrawer(

@@ -3,8 +3,12 @@ package appserviciotecnico.ui.screen
 import android.app.Application
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -12,14 +16,21 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import appserviciotecnico.ui.components.*
+import appserviciotecnico.viewmodel.ExternalUiState
+import appserviciotecnico.viewmodel.ExternalViewModel
 import appserviciotecnico.viewmodel.viewmodels.HomeViewModel
 import appserviciotecnico.viewmodel.factories.HomeViewModelFactory
+import coil.compose.AsyncImage
 
 //  Pantalla de inicio mejorada con dashboard
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,6 +40,7 @@ fun HomeScreen(
     onNavigateToAgendar: () -> Unit = {},
     onNavigateToSolicitudes: () -> Unit = {},
     onNavigateToFormulario: () -> Unit = {},
+    onNavigateToExternalInfo: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -36,6 +48,11 @@ fun HomeScreen(
         factory = HomeViewModelFactory(context.applicationContext as Application)
     )
     val estado by viewModel.estado.collectAsState()
+
+    // ViewModel para API externa
+    val externalViewModel: ExternalViewModel = viewModel()
+    val externalUiState by externalViewModel.uiState.collectAsState()
+    val juegos by externalViewModel.juegos.collectAsState()
 
     Scaffold(
         floatingActionButton = {
@@ -77,6 +94,16 @@ fun HomeScreen(
                 ) {
                     PromoBanner(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
                 }
+            }
+
+            // Sección de Novedades en Gaming (API Externa)
+            item {
+                GamingNewsSection(
+                    uiState = externalUiState,
+                    juegos = juegos.take(5),
+                    onVerMas = onNavigateToExternalInfo,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
             }
 
             // Sección de estadísticas
@@ -251,4 +278,229 @@ private data class QuickAccessItem(
     val colors: List<Color>,
     val onClick: () -> Unit
 )
+
+/**
+ * Sección de novedades en gaming usando API externa
+ */
+@Composable
+private fun GamingNewsSection(
+    uiState: ExternalUiState,
+    juegos: List<appserviciotecnico.network.models.external.Game>,
+    onVerMas: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        // Header de la sección
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = null,
+                    tint = Color(0xFFFFD700),
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "🎮 Novedades en Gaming",
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+            TextButton(onClick = onVerMas) {
+                Text("Ver más")
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowRight,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+        }
+
+        // Contenido según el estado
+        when (uiState) {
+            is ExternalUiState.Loading -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(modifier = Modifier.size(40.dp))
+                }
+            }
+            is ExternalUiState.Error -> {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "⚠️ No se pudieron cargar las novedades",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                    }
+                }
+            }
+            is ExternalUiState.Success -> {
+                if (juegos.isEmpty()) {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(32.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("No hay juegos disponibles")
+                        }
+                    }
+                } else {
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        items(juegos) { juego ->
+                            GameMiniCard(
+                                juego = juego,
+                                onClick = onVerMas
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Card compacta para mostrar un juego en el dashboard
+ */
+@Composable
+private fun GameMiniCard(
+    juego: appserviciotecnico.network.models.external.Game,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .width(160.dp)
+            .height(220.dp)
+            .clickable(onClick = onClick),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Imagen de fondo
+            val imageUrl = juego.getFullImageUrl()
+            if (!imageUrl.isNullOrBlank()) {
+                AsyncImage(
+                    model = imageUrl,
+                    contentDescription = juego.name,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "🎮",
+                        style = MaterialTheme.typography.displayMedium
+                    )
+                }
+            }
+
+            // Gradiente oscuro para mejor legibilidad del texto
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black.copy(alpha = 0.7f)
+                            ),
+                            startY = 100f
+                        )
+                    )
+            )
+
+            // Información del juego
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                // Rating en la esquina superior
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color(0xFFFFD700).copy(alpha = 0.9f)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = Modifier.size(14.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = juego.rating.toString(),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+
+                // Nombre del juego
+                Column {
+                    Text(
+                        text = juego.name,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = Color.White,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    if (!juego.released.isNullOrBlank()) {
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = juego.released,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.White.copy(alpha = 0.8f)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
 
