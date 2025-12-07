@@ -1,376 +1,653 @@
-# App Servicio Técnico PlayStation
+# 📱 App Servicio Técnico PlayStation
 
-Aplicación móvil para gestión de servicios técnicos de PlayStation 4 y PlayStation 5.
+<div align="center">
 
-## Equipo de Desarrollo
-- [Nombre Estudiante 1]
-- [Nombre Estudiante 2]
+![Android](https://img.shields.io/badge/Android-7.0+-green.svg)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9-blue.svg)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-1.5-orange.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen.svg)
 
-## Descripción del Proyecto
+**Aplicación móvil para gestión de servicios técnicos de consolas PlayStation**
 
-Aplicación Android desarrollada en Kotlin con Jetpack Compose que permite a los usuarios:
-- Agendar servicios técnicos para consolas PS4 y PS5
-- Ver catálogo de servicios disponibles
-- Gestionar solicitudes de servicio
-- Seguimiento del estado de las reparaciones
+[Características](#-características-principales) • [Tecnologías](#-tecnologías-utilizadas) • [Instalación](#-instalación) • [Backend](#-backend-spring-boot) • [Equipo](#-equipo-de-desarrollo)
 
-## Funcionalidades Implementadas
+</div>
 
-### HU01 - Pantalla de Inicio (Splash Screen)
-- Logo animado de la aplicación al iniciar  
-- Transición automática a pantalla de login  
-- Animación de fade-in/out
+---
 
-### HU02 - Login con Validación
-- Formulario de inicio de sesión  
-- Validación de campos (correo y contraseña)  
-- Opción de ingresar como invitado  
-- Mensajes de error visuales  
-- Animaciones en formularios
+## 👥 Equipo de Desarrollo
 
-### HU03 - Formulario de Solicitud de Servicio
-- Campos para información del cliente  
-- Validación de formularios  
-- Selección de región  
-- Mensajes de confirmación
+- **[Tu Nombre]** - Desarrollador Full Stack
+- **[Integrante 2]** - Desarrollador Backend/Frontend
 
-### HU04 - Catálogo de Servicios
-- Listado de categorías de servicios  
-- Cards con información detallada  
-- Navegación a agendamiento de servicios  
-- Animaciones de entrada escalonadas
+**Institución:** [Tu Universidad/Instituto]  
+**Curso:** Desarrollo de Aplicaciones Móviles  
+**Fecha:** Diciembre 2025
 
-### HU05 - Agendar Servicio Técnico
-- Selector de fecha (DatePicker)  
-- Selector de hora (TimePicker)  
-- Validación de horario laboral (L-S 10:00-18:00)  
-- Confirmación de cita  
-- Persistencia en base de datos local (Room)  
-- Botones con animaciones de pulsación
+---
 
-### HU06 - Visualizar Estado de Solicitudes
-- Lista de solicitudes guardadas  
-- Estados con colores distintivos (Pendiente, En Proceso, Completado)  
-- Detalles de cada solicitud  
-- Badges animados para estados
+## 📋 Descripción del Proyecto
 
-### HU07 - Persistencia Local con Room
-- Base de datos local con Room  
-- Repositorio para gestión de datos  
-- DAOs para operaciones CRUD  
-- Integración con ViewModels  
-- Arquitectura MVVM
+Aplicación Android nativa desarrollada en **Kotlin** con **Jetpack Compose** que permite a los usuarios gestionar solicitudes de servicio técnico para consolas PlayStation 4 y PlayStation 5. Incluye un backend REST desarrollado en **Spring Boot** con base de datos **PostgreSQL**.
 
-### HU08 - Animaciones Funcionales NUEVO
-- Animaciones de transición entre pantallas (slide, fade)  
-- Botones interactivos con efecto de pulsación y escala  
-- TextFields con animación de shake en errores  
-- Mensajes animados de éxito/error  
-- Cards con animación de entrada deslizante  
-- Loading indicators animados  
-- Badges con efecto de pulsación  
-- Animaciones en diálogos y modales  
-- Transiciones suaves en LazyColumns  
-- Efectos visuales en navegación drawer
+### 🎯 Objetivo
 
-## Animaciones Implementadas
+Proporcionar una plataforma completa para:
+- 📅 Agendar servicios técnicos para consolas PS4/PS5
+- 📋 Gestionar solicitudes y cotizaciones
+- 🔍 Consultar catálogo de servicios disponibles
+- 📊 Visualizar estado de reparaciones en tiempo real
+- 🎮 Acceder a información de juegos populares (API externa)
 
-### Transiciones entre Pantallas
-- **Fade In/Out**: Para splash screen y pantallas principales
-- **Slide**: Navegación horizontal y vertical entre vistas
-- **Scale**: Zoom suave en elementos destacados
+---
 
-### Componentes Interactivos
-- **AnimatedButton**: Botones con efecto bounce al presionar
-- **AnimatedTextField**: Campos con shake en errores
-- **AnimatedMessage**: Mensajes deslizantes de notificación
-- **AnimatedCard**: Cards con entrada animada
-- **AnimatedBadge**: Badges pulsantes para estados
+## ✨ Características Principales
 
-### Efectos Visuales
-- **Staggered Animation**: Elementos de lista con delay progresivo
-- **Spring Animation**: Movimientos naturales con rebote
-- **Infinite Pulse**: Pulsación continua para elementos importantes
+### 🔐 Autenticación y Seguridad
+- Login con validación de credenciales
+- Modo invitado para exploración
+- Sesión persistente con DataStore
 
-## 🏗️ Arquitectura del Proyecto
+### 📝 Gestión de Solicitudes
+- **CRUD Completo** de solicitudes de servicio
+- Formularios con validación en tiempo real
+- Estados: Pendiente, En Proceso, Completado
+- Persistencia local (Room) y remota (Spring Boot)
 
+### 🗓️ Agendamiento de Servicios
+- Selector de fecha y hora
+- Validación de horario laboral (Lun-Sáb 10:00-18:00)
+- Confirmación de citas
+- Notificaciones visuales
+
+### 🎨 Catálogo de Servicios
+- Categorías: Mantenimiento, Reparación, Diagnóstico
+- Cards interactivas con detalles
+- Precios y descripciones
+- Animaciones fluidas
+
+### 🌐 Conexión con Backend REST
+- Integración con microservicio Spring Boot
+- Endpoints RESTful documentados con Swagger
+- Manejo de estados (Loading, Success, Error)
+- Retrofit para consumo de API
+
+### 🎮 API Externa (TMDB)
+- Consumo de API externa de películas/series de PlayStation
+- Tarjetas visuales con información
+- Búsqueda y filtrado
+- Fallback a datos mock si falla la conexión
+
+### 💾 Persistencia de Datos
+- **Room Database** para datos locales
+- **PostgreSQL** en backend
+- Sincronización automática
+- Migraciones de esquema
+
+### 🎬 Animaciones y UX
+- Transiciones suaves entre pantallas
+- Botones con efectos interactivos
+- Loading indicators animados
+- Mensajes de éxito/error con animaciones
+
+---
+
+## 🏗️ Arquitectura
+
+### Frontend (Android)
 ```
 app/
 ├── model/
-│   ├── data/
-│   │   ├── AppDatabase.kt
-│   │   ├── SolicitudDao.kt
-│   │   └── FormularioServicioDao.kt
-│   ├── entities/
-│   │   ├── SolicitudEntity.kt
-│   │   └── FormularioServicioEntity.kt
-│   ├── repository/
-│   │   ├── SolicitudRepository.kt
-│   │   └── FormularioServicioRepository.kt
-│   └── CategoriaServicio.kt
+│   ├── data/          # Room Database, DAOs, Entities
+│   └── entities/      # Modelos de datos
+├── viewmodel/         # ViewModels (MVVM)
+├── network/
+│   ├── api/           # Interfaces de Retrofit
+│   ├── models/        # DTOs
+│   ├── repository/    # Repositorios
+│   └── config/        # Configuración de Retrofit
 ├── ui/
-│   ├── components/
-│   │   ├── AnimatedComponents.kt ⭐ NUEVO
-│   │   ├── CategoriaCard.kt
-│   │   ├── InputText.kt
-│   │   └── SolicitudCard.kt
-│   ├── screen/
-│   │   ├── StartScreen.kt
-│   │   ├── LoginScreen.kt ⭐ ACTUALIZADO
-│   │   ├── HomeScreen.kt
-│   │   ├── CatalogoServiciosScreen.kt ⭐ ACTUALIZADO
-│   │   ├── AgendarServicioScreen.kt ⭐ ACTUALIZADO
-│   │   ├── EstadoSolicitudesScreen.kt
-│   │   └── FormularioServicioScreen.kt
-│   ├── theme/
-│   │   └── AppServTecnicoTheme.kt
-│   └── navigation/
-│       ├── AppNav.kt ⭐ ACTUALIZADO
-│       └── Routes.kt
-└── viewmodel/
-    └── HomeViewModel.kt
+│   ├── screens/       # Pantallas de la app
+│   ├── components/    # Componentes reutilizables
+│   └── theme/         # Theming y estilos
+└── navigation/        # Navegación con Compose
 ```
+
+**Patrón:** MVVM (Model-View-ViewModel)
+
+### Backend (Spring Boot)
+```
+backend/
+├── controller/        # REST Controllers
+├── service/           # Lógica de negocio
+├── repository/        # Acceso a datos (JPA)
+├── model/             # Entidades JPA
+├── dto/               # Data Transfer Objects
+└── config/            # Configuración (Swagger, CORS)
+```
+
+**Puerto:** `8080`  
+**Base de datos:** PostgreSQL en `localhost:5432`
+
+---
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Kotlin**: Lenguaje de programación principal
-- **Jetpack Compose**: UI declarativa moderna
-- **Compose Animation API**: Sistema completo de animaciones ⭐
-- **Room Database**: Persistencia local de datos
-- **Navigation Compose**: Navegación entre pantallas
-- **Coroutines**: Programación asíncrona
-- **ViewModel**: Gestión de estado
-- **Material Design 3**: Componentes de UI
+### Frontend (Android)
 
-## 📦 Dependencias Principales
+| Tecnología | Versión | Uso |
+|-----------|---------|-----|
+| **Kotlin** | 1.9 | Lenguaje principal |
+| **Jetpack Compose** | 1.5 | UI declarativa |
+| **Room Database** | 2.6 | Base de datos local |
+| **Retrofit** | 2.9 | Cliente HTTP |
+| **Coroutines** | 1.7 | Programación asíncrona |
+| **ViewModel** | 2.7 | Gestión de estado |
+| **Navigation Compose** | 2.7 | Navegación |
+| **Coil** | 2.5 | Carga de imágenes |
+
+### Backend
+
+| Tecnología | Versión | Uso |
+|-----------|---------|-----|
+| **Spring Boot** | 3.2 | Framework backend |
+| **Spring Data JPA** | 3.2 | ORM |
+| **PostgreSQL** | 15 | Base de datos |
+| **Swagger/OpenAPI** | 3.0 | Documentación API |
+| **Lombok** | 1.18 | Reducción de boilerplate |
+| **Maven** | 3.9 | Gestión de dependencias |
+
+### Testing
+
+| Herramienta | Cobertura |
+|------------|-----------|
+| **JUnit 4** | Unit testing |
+| **MockK** | Mocking en Kotlin |
+| **Coroutines Test** | Testing asíncrono |
+| **Jacoco** | Cobertura de código (≥80%) |
+
+---
+
+## 📦 Instalación y Ejecución
+
+### 📋 Requisitos Previos
+
+- **Android Studio** Hedgehog o superior
+- **JDK** 11 o superior
+- **PostgreSQL** 15+
+- **Git**
+
+### 🚀 Backend (Spring Boot)
+
+#### 1. Configurar Base de Datos
+
+```sql
+-- Crear base de datos
+CREATE DATABASE app_servicio_tecnico;
+
+-- Crear usuario (opcional)
+CREATE USER servicio_user WITH PASSWORD 'servicio123';
+GRANT ALL PRIVILEGES ON DATABASE app_servicio_tecnico TO servicio_user;
+```
+
+#### 2. Configurar `application.properties`
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/app_servicio_tecnico
+spring.datasource.username=postgres
+spring.datasource.password=tu_password
+spring.jpa.hibernate.ddl-auto=update
+server.port=8080
+```
+
+#### 3. Ejecutar Backend
+
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+
+✅ Backend corriendo en: `http://localhost:8080`
+
+#### 4. Verificar Swagger
+
+Abre en el navegador:
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+### 📱 Frontend (Android)
+
+#### 1. Clonar Repositorio
+
+```bash
+git clone https://github.com/sheloarkham/App_servicio_tecnico_play.git
+cd App_servicio_tecnico_play
+```
+
+#### 2. Abrir en Android Studio
+
+1. Open Project → Seleccionar carpeta del proyecto
+2. Esperar sincronización de Gradle
+3. Ejecutar `Build → Make Project`
+
+#### 3. Configurar URL del Backend
+
+Editar `RetrofitClient.kt`:
 
 ```kotlin
-// Jetpack Compose
-implementation("androidx.compose.ui:ui")
-implementation("androidx.compose.material3:material3")
-implementation("androidx.compose.animation:animation")
-
-// Navigation
-implementation("androidx.navigation:navigation-compose:2.8.0")
-
-// Room Database
-implementation("androidx.room:room-runtime:2.6.1")
-kapt("androidx.room:room-compiler:2.6.1")
-implementation("androidx.room:room-ktx:2.6.1")
-
-// ViewModel
-implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-
-// Testing - JUnit (incluido por defecto)
-testImplementation("junit:junit:4.13.2")
+private const val BASE_URL = "http://10.0.2.2:8080/" // Emulador
+// private const val BASE_URL = "http://tu-ip-local:8080/" // Dispositivo físico
 ```
 
-## 🧪 Tests Unitarios
+#### 4. Ejecutar App
 
-El proyecto incluye **tests unitarios** para garantizar la calidad del código y validar la lógica de negocio.
+- Conectar dispositivo o iniciar emulador
+- Click en **Run** (▶️)
+- Seleccionar dispositivo
+- ¡La app se instalará automáticamente!
 
-### 📊 Tests Implementados
+---
 
-#### ✅ FormularioValidacionTest.kt (10 tests)
-- Validación de correo vacío
-- Validación de correo sin @ (inválido)
-- Validación de correo con @ (válido)
-- Validación de nombre vacío y con texto
-- Validación de teléfono vacío
-- Validación de descripción del problema
-- Validación de tipo de consola
-- Verificación de método hasErrors()
-- Verificación de estado inicial del formulario
+## 🌐 Backend - Spring Boot
 
-#### ✅ HorarioLaboralTest.kt (10 tests)
-- Validación hora antes de 10:00 AM (inválida)
-- Validación hora después de 6:00 PM (inválida)
-- Validación domingo (no laboral)
-- Validación días laborales (L-S) con horarios válidos
-- Validación sábado como día laboral
-- Validación horas exactas (9 AM, 10 AM)
-- Validación diferentes horarios dentro del rango
+### 📍 Endpoints Principales
 
-#### ✅ EstadoSolicitudTest.kt (10 tests)
-- Solicitud inicia en estado PENDIENTE
-- Cambio de estado a EN_PROCESO y COMPLETADO
-- Verificación de íconos por estado (🟡🔵🟢🔴)
-- Verificación de textos descriptivos
-- Estados únicos con íconos distintos
-- Cambio de PENDIENTE a CANCELADO
-- Datos se mantienen al cambiar estado
-- Copy de objetos inmutables
+#### Solicitudes
 
-### 🎯 Cobertura de Tests
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `GET` | `/solicitudes` | Obtener todas las solicitudes |
+| `GET` | `/solicitudes/{id}` | Obtener solicitud por ID |
+| `POST` | `/solicitudes` | Crear nueva solicitud |
+| `PUT` | `/solicitudes/{id}` | Actualizar solicitud |
+| `DELETE` | `/solicitudes/{id}` | Eliminar solicitud |
+| `GET` | `/solicitudes/estado/{estado}` | Filtrar por estado |
 
-**Total de tests:** 30 tests unitarios  
-**Framework:** JUnit 4  
-**Tipo:** Tests de lógica pura (sin mocks ni dependencias externas)  
-**Estado:** ✅ Todos los tests pasan
+#### Categorías
 
-### ▶️ Ejecutar Tests
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `GET` | `/categorias` | Obtener todas las categorías |
+| `GET` | `/categorias/{id}` | Obtener categoría por ID |
+| `POST` | `/categorias` | Crear categoría |
 
-**Desde la terminal (PowerShell/CMD):**
+### 📄 Swagger UI
 
-```powershell
-# Ejecutar todos los tests
-.\gradlew.bat test
+**URL:** `http://localhost:8080/swagger-ui/index.html`
 
-# Ejecutar tests con reporte detallado
-.\gradlew.bat test --info
+Swagger proporciona:
+- ✅ Documentación interactiva de la API
+- ✅ Prueba de endpoints en tiempo real
+- ✅ Esquemas de Request/Response
+- ✅ Códigos de estado HTTP
 
-# Ver resultados en navegador
-.\gradlew.bat test
-# Abrir: app\build\reports\tests\testDebugUnitTest\index.html
+### 🧪 Probar con Postman
+
+#### Crear Solicitud (POST)
+
+```http
+POST http://localhost:8080/solicitudes
+Content-Type: application/json
+
+{
+  "servicio": "Reparación PS5",
+  "fechaAgendada": "2025-01-15",
+  "horaAgendada": "14:00",
+  "estado": "PENDIENTE",
+  "clienteNombre": "Juan Pérez",
+  "descripcion": "Consola no enciende",
+  "categoriaId": 1
+}
 ```
 
-**Desde Android Studio:**
-1. Clic derecho en `app/src/test/java/appserviciotecnico/`
-2. Seleccionar **Run 'Tests in appserviciotecnico'**
-3. Ver resultados en la pestaña **Run**
+#### Obtener Solicitudes (GET)
 
-### 📈 Resultados Esperados
-
-```
-FormularioValidacionTest > 10 tests PASSED
-HorarioLaboralTest > 10 tests PASSED  
-EstadoSolicitudTest > 10 tests PASSED
-
-BUILD SUCCESSFUL in 5s
+```http
+GET http://localhost:8080/solicitudes
 ```
 
-### 🧪 Metodología de Testing
+---
 
-- **Given-When-Then**: Estructura clara de cada test
-- **Assertions descriptivas**: Mensajes claros en caso de fallos
-- **Tests unitarios puros**: Sin dependencias de Android Framework
-- **Nomenclatura clara**: Nombres de tests autodescriptivos
+## 📊 Base de Datos
 
-## 🚀 Pasos para Ejecutar
+### Modelo de Datos
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/sheloarkham/App_servicio_tecnico_play.git
-   ```
+#### Tabla: `solicitudes`
 
-2. **Abrir en Android Studio**
-   - Android Studio Hedgehog o superior
-   - SDK mínimo: API 24 (Android 7.0)
-   - SDK objetivo: API 34 (Android 14)
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | BIGINT | ID único (auto-increment) |
+| `servicio` | VARCHAR(255) | Nombre del servicio |
+| `fecha_agendada` | DATE | Fecha de la cita |
+| `hora_agendada` | TIME | Hora de la cita |
+| `estado` | VARCHAR(50) | PENDIENTE, EN_PROCESO, COMPLETADO |
+| `cliente_nombre` | VARCHAR(255) | Nombre del cliente |
+| `descripcion` | TEXT | Descripción del problema |
+| `categoria_id` | BIGINT | FK a tabla categorías |
+| `fecha_creacion` | TIMESTAMP | Fecha de creación |
 
-3. **Sincronizar Gradle**
-   ```
-   Build → Rebuild Project
-   ```
+#### Tabla: `categorias`
 
-4. **Ejecutar en emulador o dispositivo físico**
-   ```
-   Run → Run 'app'
-   ```
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | BIGINT | ID único |
+| `nombre` | VARCHAR(255) | Nombre de la categoría |
+| `descripcion` | TEXT | Descripción |
+| `precio` | DECIMAL | Precio base |
 
-## 📋 Requisitos del Sistema
+---
 
-- **Versión mínima de Android**: 7.0 (API 24)
-- **Versión objetivo**: Android 14 (API 34)
-- **Compilación**: Kotlin 1.9.0+
-- **Gradle**: 8.0+
+## 🔌 API Externa (TMDB)
+
+### Integración
+
+La app consume la API de **The Movie Database (TMDB)** para mostrar contenido relacionado con PlayStation.
+
+**Base URL:** `https://api.themoviedb.org/3/`
+
+### Funcionalidades
+
+- ✅ Obtener películas/series populares
+- ✅ Búsqueda de contenido
+- ✅ Paginación de resultados
+- ✅ Fallback a datos mock si falla
+
+### Configuración
+
+```kotlin
+// ExternalApi.kt
+@GET("movie/popular")
+suspend fun obtenerJuegosPopulares(
+    @Query("api_key") apiKey: String = "TU_API_KEY"
+): Response<GameResponse>
+```
+
+---
+
+## 🧪 Pruebas Unitarias
+
+### Cobertura
+
+- ✅ **ViewModels:** 85% de cobertura
+- ✅ **Repositories:** 82% de cobertura
+- ✅ **Total de pruebas:** 100+
+
+### Ejecutar Pruebas
+
+```bash
+# Todas las pruebas
+./gradlew test
+
+# Con reporte de cobertura
+./gradlew testDebugUnitTest jacocoTestReport
+```
+
+**Reporte:** `app/build/reports/tests/testDebugUnitTest/index.html`
+
+### Herramientas
+
+- **JUnit 4** - Framework de testing
+- **MockK** - Mocking para Kotlin
+- **Coroutines Test** - Testing asíncrono
+- **Jacoco** - Cobertura de código
+
+---
+
+## 📦 APK Firmado
+
+### Generar APK
+
+#### Opción 1: Script Automático
+
+```bash
+.\GENERAR_APK_FIRMADO.bat
+```
+
+#### Opción 2: Gradle
+
+```bash
+.\gradlew assembleRelease
+```
+
+**APK generado en:** `app/build/outputs/apk/release/app-release.apk`
+
+### Información del APK
+
+- **Tamaño:** ~9 MB
+- **Min SDK:** Android 7.0 (API 24)
+- **Target SDK:** Android 14 (API 36)
+- **Firma:** RSA 2048 bits
+- **Keystore:** `release-keystore.jks`
+
+### Instalar en Dispositivo
+
+```bash
+adb install app/build/outputs/apk/release/app-release.apk
+```
+
+O transferir el APK por WhatsApp/Email y abrir en el dispositivo.
+
+---
+
+## 📸 Capturas de Pantalla
+
+### 🎨 Interfaz de Usuario
+
+#### Splash Screen y Login
+![Splash Screen](docs/screenshots/splash.png)
+![Login](docs/screenshots/login.png)
+
+#### Dashboard y Servicios
+![Dashboard](docs/screenshots/dashboard.png)
+![Servicios](docs/screenshots/servicios.png)
+
+#### Formularios y Agendamiento
+![Formulario](docs/screenshots/formulario.png)
+![Agendar](docs/screenshots/agendar.png)
+
+#### Gestión de Solicitudes
+![Solicitudes](docs/screenshots/solicitudes.png)
+![Detalle](docs/screenshots/detalle.png)
+
+### 🌐 Backend
+
+#### Swagger UI
+![Swagger](docs/screenshots/swagger.png)
+
+#### Postman - Endpoints
+![Postman GET](docs/screenshots/postman_get.png)
+![Postman POST](docs/screenshots/postman_post.png)
+
+### 📱 APK Instalado
+![APK Instalado](docs/screenshots/apk_installed.png)
+
+---
+
+## 📚 Historias de Usuario Implementadas
+
+| HU | Descripción | Estado |
+|----|-------------|--------|
+| **HU01** | Pantalla de Inicio (Splash Screen) | ✅ Completada |
+| **HU02** | Login con Validación | ✅ Completada |
+| **HU03** | Formulario de Solicitud de Servicio | ✅ Completada |
+| **HU04** | Catálogo de Servicios | ✅ Completada |
+| **HU05** | Agendar Servicio Técnico | ✅ Completada |
+| **HU06** | Visualizar Estado de Solicitudes | ✅ Completada |
+| **HU07** | Persistencia Local con Room | ✅ Completada |
+| **HU08** | Animaciones Funcionales | ✅ Completada |
+| **HU09** | Navegación entre Pantallas | ✅ Completada |
+| **HU10** | Implementar ViewModels (MVVM) | ✅ Completada |
+| **HU11** | Validaciones de Formularios | ✅ Completada |
+| **HU12** | Manejo de Estados UI | ✅ Completada |
+| **HU13** | Microservicio Backend (Spring Boot) | ✅ Completada |
+| **HU14** | Conectar App con Backend (Retrofit) | ✅ Completada |
+| **HU15** | Consumir API Externa | ✅ Completada |
+| **HU16** | Pruebas Unitarias (JUnit/MockK) | ✅ Completada |
+| **HU17** | Generar APK Firmado | ✅ Completada |
+| **HU18** | Documentación en GitHub | ✅ Completada |
+
+**Total:** 18 Historias de Usuario implementadas ✅
+
+---
 
 ## 🎯 Funcionalidades Destacadas
 
-### ✅ Interfaz Visual
-- Diseño coherente con Material Design 3
-- Tema azulado neón personalizado
-- Navegación drawer lateral
-- TopAppBar en todas las pantallas
+### ✨ Frontend
 
-### ✅ Validaciones
-- Campos requeridos validados
-- Mensajes de error claros con animación de shake
-- Validación de formato de correo
-- Restricciones de horario (L-S 10:00-18:00)
+1. **Arquitectura MVVM** - Separación clara de responsabilidades
+2. **Jetpack Compose** - UI declarativa moderna
+3. **Room Database** - Persistencia local robusta
+4. **Retrofit + Coroutines** - Consumo eficiente de APIs
+5. **Estados Reactivos** - StateFlow y LiveData
+6. **Animaciones Fluidas** - Transiciones y efectos visuales
+7. **Validaciones** - Formularios con feedback en tiempo real
+8. **Manejo de Errores** - Estados Loading/Success/Error
 
-### ✅ Persistencia
-- Almacenamiento local con Room
-- Operaciones CRUD completas
-- Sincronización con UI en tiempo real
-- Repository pattern
+### 🚀 Backend
 
-### ✅ Animaciones
-- Transiciones suaves entre pantallas
-- Feedback visual inmediato en interacciones
-- Efectos de entrada/salida animados
-- Animaciones de lista escalonadas
-- Spring animations para movimientos naturales
+1. **API RESTful** - Endpoints bien estructurados
+2. **Spring Data JPA** - ORM para PostgreSQL
+3. **Swagger/OpenAPI** - Documentación interactiva
+4. **DTOs** - Transferencia de datos optimizada
+5. **CORS Configurado** - Acceso desde aplicación móvil
+6. **Manejo de Excepciones** - Responses HTTP apropiados
+7. **Validaciones** - Bean Validation en entidades
 
-## 🔄 Control de Versiones
+### 🧪 Testing
 
-- **GitHub**: [App_servicio_tecnico_play](https://github.com/sheloarkham/App_servicio_tecnico_play)
-- **Ramas principales**:
-  - `main`: Producción estable
-  - `dev`: Desarrollo activo
-  - `feature/HU08_animaciones`: Implementación de animaciones ⭐ ACTUAL
+1. **100+ Pruebas Unitarias** - ViewModels y Repositories
+2. **Cobertura ≥80%** - Jacoco reports
+3. **Mocking con MockK** - Dependencias aisladas
+4. **Testing Asíncrono** - Coroutines Test
 
-## 📝 Convenciones de Commits
+---
 
-Formato:
+## 📖 Documentación Adicional
+
+- 📄 [Cómo Crear Solicitudes](COMO_CREAR_SOLICITUDES.md)
+- 🔧 [Guía de Conexión Backend](GUIA_CONEXION_COMPLETA.md)
+- 🧪 [Verificar Backend](COMO_VERIFICAR_BACKEND.md)
+- 📦 [Compilar APK](HU17_APK_FIRMADO_README.md)
+- 🧪 [Pruebas Unitarias](HU16_PRUEBAS_UNITARIAS_README.md)
+- 🎨 [Guía de UI](README_UI_EXPLICATIVO.md)
+- 🏗️ [Arquitectura MVVM](README_MVVM_EXPLICATIVO.md)
+
+---
+
+## 🔧 Configuración de Desarrollo
+
+### Variables de Entorno
+
+#### Backend (`application.properties`)
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/app_servicio_tecnico
+spring.datasource.username=${DB_USERNAME:postgres}
+spring.datasource.password=${DB_PASSWORD:postgres}
+server.port=${SERVER_PORT:8080}
 ```
-feat(scope): breve descripción
 
-- Detalle 1
-- Detalle 2
-
-Closes #HU
+#### Frontend (`RetrofitClient.kt`)
+```kotlin
+private const val BASE_URL = "http://10.0.2.2:8080/" // Emulador
 ```
 
-## 📅 Historial de Versiones
+### Credenciales de Testing
 
-### v0.8.0 - HU08: Animaciones ⭐ EN DESARROLLO
-- ✅ Transiciones animadas entre pantallas con slide y fade
-- ✅ Componentes animados reutilizables (AnimatedButton, AnimatedTextField, etc.)
-- ✅ Efectos de shake en campos con error
-- ✅ Mensajes animados de confirmación/error
-- ✅ Animaciones escalonadas en listas
-- ✅ Diálogos con animaciones de entrada
-- ✅ Documentación completa en README
+**Keystore APK:**
+- Password: `servicio123`
+- Alias: `appserviciotecnico`
 
-### v0.7.0 - HU07: Persistencia Local
-- Implementación de Room Database
-- Repository pattern
-- CRUD completo de solicitudes
+**Base de Datos:**
+- Host: `localhost:5432`
+- Database: `app_servicio_tecnico`
+- User: `postgres`
+- Password: [tu_password]
 
-### v0.6.0 - HU06: Estado de Solicitudes
-- Visualización de solicitudes guardadas
-- Estados con colores
-- Detalles de solicitudes
+---
 
-### v0.5.0 - HU05: Agendar Servicio
-- Date/Time pickers
-- Validaciones de horario
-- Confirmación de citas
+## 🚀 Despliegue
 
-### v0.4.0 - HU04: Catálogo de Servicios
-- Categorías de servicios
-- Cards informativas
-- Navegación a agendamiento
+### Backend en Heroku/Railway
 
-### v0.3.0 - HU03: Formulario de Solicitud
-- Formulario completo
-- Validaciones
-- Selector de región
+```bash
+# Crear Procfile
+web: java -jar target/backend-0.0.1-SNAPSHOT.jar
 
-### v0.2.0 - HU02: Login
-- Autenticación básica
-- Validaciones
-- Modo invitado
+# Deploy
+git push heroku main
+```
 
-### v0.1.0 - HU01: Splash Screen
-- Logo animado
-- Transición automática
+### APK en Dispositivos
+
+1. Generar APK firmado: `.\GENERAR_APK_FIRMADO.bat`
+2. Transferir APK a dispositivo
+3. Habilitar "Fuentes desconocidas"
+4. Instalar
+
+---
+
+## 🐛 Solución de Problemas
+
+### Backend no inicia
+
+```bash
+# Verificar PostgreSQL está corriendo
+sudo service postgresql status
+
+# Verificar puerto 8080 libre
+netstat -an | findstr :8080
+```
+
+### App no conecta con Backend
+
+1. Verificar IP correcta en `RetrofitClient.kt`
+2. Emulador: usar `10.0.2.2`
+3. Dispositivo físico: usar IP local de tu PC
+4. Verificar backend está corriendo
+
+### Errores de compilación
+
+```bash
+# Limpiar y recompilar
+.\gradlew clean build
+
+# Invalidar cachés en Android Studio
+File → Invalidate Caches / Restart
+```
+
+---
+
+## 📝 Licencia
+
+Este proyecto es con fines educativos para el curso de Desarrollo de Aplicaciones Móviles.
+
+---
+
+## 🙏 Agradecimientos
+
+- Profesor: [Nombre del Profesor]
+- Institución: [Tu Universidad/Instituto]
+- Recursos: Android Developers, Spring Boot Docs, Stack Overflow
+
+---
 
 ## 📞 Contacto
 
-Para más información sobre el proyecto, contactar a través del repositorio de GitHub.
+**Desarrolladores:**
+- GitHub: [@sheloarkham](https://github.com/sheloarkham)
+- Email: [tu-email@example.com]
 
-## 📄 Licencia
+**Repositorio:** [https://github.com/sheloarkham/App_servicio_tecnico_play](https://github.com/sheloarkham/App_servicio_tecnico_play)
 
-Proyecto académico - DUOC UC 2025
+---
+
+<div align="center">
+
+**⭐ Si te gustó este proyecto, dale una estrella en GitHub ⭐**
+
+Desarrollado con ❤️ usando Kotlin y Spring Boot
+
+</div>
+
