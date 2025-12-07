@@ -13,3 +13,13 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Keystore - NO subir al repositorio por seguridad
+*.jks
+*.keystore
+release-keystore.jks
+
+# APK firmado
+app-release.apk
+*.apk
+
