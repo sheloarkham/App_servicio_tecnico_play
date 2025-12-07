@@ -75,15 +75,6 @@
             </PendingDiffInfo>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/appserviciotecnico/viewmodel/factories/FormularioServicioViewModelFactory.kt">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/app/src/main/java/appserviciotecnico/viewmodel/factories/FormularioServicioViewModelFactory.kt" />
-              <option name="originalContent" value="package appserviciotecnico.viewmodel.factories&#10;&#10;import android.app.Application&#10;import androidx.lifecycle.ViewModel&#10;import androidx.lifecycle.ViewModelProvider&#10;import appserviciotecnico.model.data.config.AppDatabase&#10;import appserviciotecnico.model.data.repository.FormularioServicioRepository&#10;import appserviciotecnico.viewmodel.viewmodels.FormularioServicioViewModel&#10;&#10;//  Factory para crear FormularioServicioViewModel con Repository&#10;class FormularioServicioViewModelFactory(&#10;    private val application: Application&#10;) : ViewModelProvider.Factory {&#10;&#10;    @Suppress(&quot;UNCHECKED_CAST&quot;)&#10;    override fun &lt;T : ViewModel&gt; create(modelClass: Class&lt;T&gt;): T {&#10;        if (modelClass.isAssignableFrom(FormularioServicioViewModel::class.java)) {&#10;            val database = AppDatabase.Companion.getDatabase(application)&#10;            val repository = FormularioServicioRepository(database.formularioServicioDao())&#10;            return FormularioServicioViewModel(repository) as T&#10;        }&#10;        throw IllegalArgumentException(&quot;Unknown ViewModel class&quot;)&#10;    }&#10;}" />
-              <option name="updatedContent" value="package appserviciotecnico.viewmodel.factories&#10;&#10;import android.app.Application&#10;import androidx.lifecycle.ViewModel&#10;import androidx.lifecycle.ViewModelProvider&#10;import appserviciotecnico.model.data.config.AppDatabase&#10;import appserviciotecnico.model.data.repository.FormularioServicioRepository&#10;import appserviciotecnico.model.domain.usecases.GuardarCotizacionUseCase&#10;import appserviciotecnico.viewmodel.viewmodels.FormularioServicioViewModel&#10;&#10;// Factory para crear FormularioServicioViewModel con UseCase&#10;class FormularioServicioViewModelFactory(&#10;    private val application: Application&#10;) : ViewModelProvider.Factory {&#10;&#10;    @Suppress(&quot;UNCHECKED_CAST&quot;)&#10;    override fun &lt;T : ViewModel&gt; create(modelClass: Class&lt;T&gt;): T {&#10;        if (modelClass.isAssignableFrom(FormularioServicioViewModel::class.java)) {&#10;            val database = AppDatabase.getDatabase(application)&#10;            val repository = FormularioServicioRepository(database.formularioServicioDao())&#10;            val guardarCotizacionUseCase = GuardarCotizacionUseCase(repository)&#10;            return FormularioServicioViewModel(guardarCotizacionUseCase) as T&#10;        }&#10;        throw IllegalArgumentException(&quot;Unknown ViewModel class&quot;)&#10;    }&#10;}" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
       </map>
     </option>
   </component>
